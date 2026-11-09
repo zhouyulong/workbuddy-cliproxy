@@ -1,0 +1,49 @@
+{
+  "date": "2026-11-09",
+  "source_repository": ".",
+  "plugin_version": "0.1.1",
+  "cpa_core_version": "8.0.48",
+  "sdk_version": "v7.2.30",
+  "go_version": "go1.27.3",
+  "target": "darwin/arm64",
+  "source_files": {
+    "main.go": "88fd7eb507c8d6c4fa85ef4b8891b407e008c44acab5cf753c0670dde82a6c5b",
+    "models.go": "35da61003c29618db6b6b69780dff7747f897cff7aa762025d2cbe173b563bd6",
+    "models_test.go": "f8ccba090620aa7855456a905f377ce9fe8b1e2bcf0352e33c3c2159b12865ea",
+    "README.md": "d75476eabf08efae3a53e393778836d36eb15716458905e2bc3ed6b88f6b5f6d",
+    "model_profiles.go": "c113ddea099f78517a26653d43b3611b54dcb18d4597fc885a96797d30c95e20",
+    "reasoning_test.go": "bc6062efb9153e8889cf13200ecedb9774ea9defd96e7605d578f1924eed5eba",
+    "tests/offline_host_smoke.py": "abba911a635a1c70858d648b98c4011659c59802f6083a5b705116cb8ef39f92"
+  },
+  "verification": {
+    "unit_test_groups": 22,
+    "unit_cases_including_groups": 170,
+    "race_test": "passed",
+    "go_vet": "passed",
+    "build": "passed",
+    "host_cases": 296,
+    "host_http_200": 290,
+    "host_rejected_invalid": 6,
+    "real_upstream_calls": 0,
+    "host_test_process_stopped": true
+  },
+  "artifact": {
+    "file": "workbuddy-0.1.1-darwin-arm64.dylib",
+    "sha256": "b1ec6e90b9705720c49116b791f60af3edcc83d0fc9a00af7735e41e36a447da",
+    "bytes": 6860290,
+    "diagnostic_transport_included": false
+  },
+  "installed_plugin": {
+    "path": "CPA plugins/darwin/arm64/workbuddy.dylib",
+    "sha256": "95f1e4947142d5cbe58620a3321e35e6a6fb3cc02a203fac4c85279e09a34d30",
+    "unchanged": true
+  },
+  "repository_old_binaries_unchanged": {
+    "workbuddy.so": "40ca00aec7f4adb51dac743a2cd34457bd16b3bbf08a1b6ddedf79db341701d4",
+    "workbuddy.dylib": "95f1e4947142d5cbe58620a3321e35e6a6fb3cc02a203fac4c85279e09a34d30",
+    "workbuddy.h": "fe248705e2738a182c2305d23a4ad66b2d038506f098a372c42e76d6cb208149"
+  },
+  "deployed": false,
+  "existing_cpa_restarted": false,
+  "global_client_catalog_modified": false
+}

@@ -228,8 +228,10 @@ func handleMethod(method string, request []byte) ([]byte, error) {
 	switch method {
 	case pluginabi.MethodPluginRegister, pluginabi.MethodPluginReconfigure:
 		return okEnvelope(wbRegistration())
-	case pluginabi.MethodModelStatic, pluginabi.MethodModelForAuth:
+	case pluginabi.MethodModelStatic:
 		return okEnvelope(pluginapi.ModelResponse{Provider: providerName, Models: wbModels()})
+	case pluginabi.MethodModelForAuth:
+		return handleModelsForAuth(request)
 	case pluginabi.MethodAuthIdentifier:
 		return okEnvelope(identifierResponse{Identifier: providerName})
 	case pluginabi.MethodAuthParse:
@@ -295,7 +297,7 @@ func wbRegistration() registration {
 		SchemaVersion: pluginabi.SchemaVersion,
 		Metadata: pluginapi.Metadata{
 			Name:             providerName,
-			Version:          "0.1.0",
+			Version:          "0.1.1",
 			Author:           "lovingfish (clean-room rebuild; original workbuddy by Sliverkiss)",
 			GitHubRepository: "https://github.com/lovingfish/workbuddy-cliproxy",
 		},
@@ -341,6 +343,9 @@ func wbModels() []pluginapi.ModelInfo {
 			MaxCompletionTokens:        maxCompletionTokens,
 			UserDefined:                true,
 		})
+	}
+	for i := range models {
+		applyKnownModelProfile(&models[i])
 	}
 	return models
 }
@@ -684,7 +689,10 @@ func handleExecExecute(raw []byte) ([]byte, error) {
 	}
 	// CodeBuddy rejects non-stream requests (code 11101), so always stream
 	// upstream and fold the chunks into a single chat.completion object.
-	body := rewriteSystemForUpstream(forceStreamBody(req.Payload, req.OriginalRequest))
+	body, err := prepareReasoningForUpstream(rewriteSystemForUpstream(forceStreamBody(req.Payload, req.OriginalRequest)), req)
+	if err != nil {
+		return nil, err
+	}
 	httpReq, err := http.NewRequest(http.MethodPost, endpointChat, bytes.NewReader(body))
 	if err != nil {
 		return nil, err
@@ -727,7 +735,10 @@ func handleExecStream(raw []byte) ([]byte, error) {
 	if len(body) == 0 {
 		body = req.OriginalRequest
 	}
-	body = rewriteSystemForUpstream(body)
+	body, err = prepareReasoningForUpstream(rewriteSystemForUpstream(body), req.ExecutorRequest)
+	if err != nil {
+		return nil, err
+	}
 
 	headers := streamHeaders()
 	sseFramed := clientNeedsSSEFrame(req.Metadata)
@@ -951,9 +962,6 @@ func rewriteSystemForUpstream(payload []byte) []byte {
 			changed = true
 		}
 	}
-	if forceMaxThinking(obj) {
-		changed = true
-	}
 	if !changed {
 		return payload
 	}
@@ -1001,22 +1009,6 @@ func sanitizeBlockedTemplates(s string) string {
 		"Main branch (you will usually use this for PRs)",
 		"Default branch (you will usually use this for PRs)")
 	return s
-}
-
-// forceMaxThinking pins reasoning_effort to "high" for hy3-family models so
-// Tencent Hunyuan 3 always reasons at maximum depth. CodeBuddy only honors
-// "high" for deep thinking (medium/low/max/xhigh/ultra all fall back to no
-// reasoning), so we override whatever the client sent. Returns true if changed.
-func forceMaxThinking(obj map[string]any) bool {
-	model, _ := obj["model"].(string)
-	if !strings.HasPrefix(model, "hy3") {
-		return false
-	}
-	if eff, _ := obj["reasoning_effort"].(string); eff == "high" {
-		return false
-	}
-	obj["reasoning_effort"] = "high"
-	return true
 }
 
 // aggregateCompletion folds an SSE stream into a single non-streaming

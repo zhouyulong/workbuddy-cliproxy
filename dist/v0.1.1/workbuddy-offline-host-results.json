@@ -1,0 +1,5562 @@
+[
+  {
+    "model": "deepseek-v4.1-flash",
+    "route": "responses",
+    "stream": true,
+    "input_effort": "low",
+    "status": 200,
+    "capture": {
+      "model": "deepseek-v4.1-flash",
+      "reasoning_effort": "low",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "response.created",
+      "response.in_progress",
+      "response.output_item.added",
+      "response.reasoning_summary_part.added",
+      "response.reasoning_summary_text.delta",
+      "response.reasoning_summary_text.done",
+      "response.reasoning_summary_part.done",
+      "response.output_item.done",
+      "response.output_item.added",
+      "response.content_part.added",
+      "response.output_text.delta",
+      "response.output_text.done",
+      "response.content_part.done",
+      "response.output_item.done",
+      "response.completed"
+    ]
+  },
+  {
+    "model": "deepseek-v4.1-flash",
+    "route": "responses",
+    "stream": true,
+    "input_effort": "high",
+    "status": 200,
+    "capture": {
+      "model": "deepseek-v4.1-flash",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "response.created",
+      "response.in_progress",
+      "response.output_item.added",
+      "response.reasoning_summary_part.added",
+      "response.reasoning_summary_text.delta",
+      "response.reasoning_summary_text.done",
+      "response.reasoning_summary_part.done",
+      "response.output_item.done",
+      "response.output_item.added",
+      "response.content_part.added",
+      "response.output_text.delta",
+      "response.output_text.done",
+      "response.content_part.done",
+      "response.output_item.done",
+      "response.completed"
+    ]
+  },
+  {
+    "model": "deepseek-v4.1-flash",
+    "route": "responses",
+    "stream": true,
+    "input_effort": "max",
+    "status": 200,
+    "capture": {
+      "model": "deepseek-v4.1-flash",
+      "reasoning_effort": "max",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "response.created",
+      "response.in_progress",
+      "response.output_item.added",
+      "response.reasoning_summary_part.added",
+      "response.reasoning_summary_text.delta",
+      "response.reasoning_summary_text.done",
+      "response.reasoning_summary_part.done",
+      "response.output_item.done",
+      "response.output_item.added",
+      "response.content_part.added",
+      "response.output_text.delta",
+      "response.output_text.done",
+      "response.content_part.done",
+      "response.output_item.done",
+      "response.completed"
+    ]
+  },
+  {
+    "model": "deepseek-v4.1-flash",
+    "route": "responses",
+    "stream": true,
+    "input_effort": null,
+    "status": 200,
+    "capture": {
+      "model": "deepseek-v4.1-flash",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "response.created",
+      "response.in_progress",
+      "response.output_item.added",
+      "response.reasoning_summary_part.added",
+      "response.reasoning_summary_text.delta",
+      "response.reasoning_summary_text.done",
+      "response.reasoning_summary_part.done",
+      "response.output_item.done",
+      "response.output_item.added",
+      "response.content_part.added",
+      "response.output_text.delta",
+      "response.output_text.done",
+      "response.content_part.done",
+      "response.output_item.done",
+      "response.completed"
+    ]
+  },
+  {
+    "model": "deepseek-v4.1-flash",
+    "route": "responses",
+    "stream": false,
+    "input_effort": "low",
+    "status": 200,
+    "capture": {
+      "model": "deepseek-v4.1-flash",
+      "reasoning_effort": "low",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "deepseek-v4.1-flash",
+    "route": "responses",
+    "stream": false,
+    "input_effort": "high",
+    "status": 200,
+    "capture": {
+      "model": "deepseek-v4.1-flash",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "deepseek-v4.1-flash",
+    "route": "responses",
+    "stream": false,
+    "input_effort": "max",
+    "status": 200,
+    "capture": {
+      "model": "deepseek-v4.1-flash",
+      "reasoning_effort": "max",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "deepseek-v4.1-flash",
+    "route": "responses",
+    "stream": false,
+    "input_effort": null,
+    "status": 200,
+    "capture": {
+      "model": "deepseek-v4.1-flash",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "deepseek-v4.1-flash",
+    "route": "chat/completions",
+    "stream": true,
+    "input_effort": "low",
+    "status": 200,
+    "capture": {
+      "model": "deepseek-v4.1-flash",
+      "reasoning_effort": "low",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "",
+      "",
+      ""
+    ]
+  },
+  {
+    "model": "deepseek-v4.1-flash",
+    "route": "chat/completions",
+    "stream": true,
+    "input_effort": "high",
+    "status": 200,
+    "capture": {
+      "model": "deepseek-v4.1-flash",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "",
+      "",
+      ""
+    ]
+  },
+  {
+    "model": "deepseek-v4.1-flash",
+    "route": "chat/completions",
+    "stream": true,
+    "input_effort": "max",
+    "status": 200,
+    "capture": {
+      "model": "deepseek-v4.1-flash",
+      "reasoning_effort": "max",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "",
+      "",
+      ""
+    ]
+  },
+  {
+    "model": "deepseek-v4.1-flash",
+    "route": "chat/completions",
+    "stream": true,
+    "input_effort": null,
+    "status": 200,
+    "capture": {
+      "model": "deepseek-v4.1-flash",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "",
+      "",
+      ""
+    ]
+  },
+  {
+    "model": "deepseek-v4.1-flash",
+    "route": "chat/completions",
+    "stream": false,
+    "input_effort": "low",
+    "status": 200,
+    "capture": {
+      "model": "deepseek-v4.1-flash",
+      "reasoning_effort": "low",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "deepseek-v4.1-flash",
+    "route": "chat/completions",
+    "stream": false,
+    "input_effort": "high",
+    "status": 200,
+    "capture": {
+      "model": "deepseek-v4.1-flash",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "deepseek-v4.1-flash",
+    "route": "chat/completions",
+    "stream": false,
+    "input_effort": "max",
+    "status": 200,
+    "capture": {
+      "model": "deepseek-v4.1-flash",
+      "reasoning_effort": "max",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "deepseek-v4.1-flash",
+    "route": "chat/completions",
+    "stream": false,
+    "input_effort": null,
+    "status": 200,
+    "capture": {
+      "model": "deepseek-v4.1-flash",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "space-bunny",
+    "route": "responses",
+    "stream": true,
+    "input_effort": "low",
+    "status": 200,
+    "capture": {
+      "model": "space-bunny",
+      "reasoning_effort": "low",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "response.created",
+      "response.in_progress",
+      "response.output_item.added",
+      "response.reasoning_summary_part.added",
+      "response.reasoning_summary_text.delta",
+      "response.reasoning_summary_text.done",
+      "response.reasoning_summary_part.done",
+      "response.output_item.done",
+      "response.output_item.added",
+      "response.content_part.added",
+      "response.output_text.delta",
+      "response.output_text.done",
+      "response.content_part.done",
+      "response.output_item.done",
+      "response.completed"
+    ]
+  },
+  {
+    "model": "space-bunny",
+    "route": "responses",
+    "stream": true,
+    "input_effort": "medium",
+    "status": 200,
+    "capture": {
+      "model": "space-bunny",
+      "reasoning_effort": "medium",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "response.created",
+      "response.in_progress",
+      "response.output_item.added",
+      "response.reasoning_summary_part.added",
+      "response.reasoning_summary_text.delta",
+      "response.reasoning_summary_text.done",
+      "response.reasoning_summary_part.done",
+      "response.output_item.done",
+      "response.output_item.added",
+      "response.content_part.added",
+      "response.output_text.delta",
+      "response.output_text.done",
+      "response.content_part.done",
+      "response.output_item.done",
+      "response.completed"
+    ]
+  },
+  {
+    "model": "space-bunny",
+    "route": "responses",
+    "stream": true,
+    "input_effort": "high",
+    "status": 200,
+    "capture": {
+      "model": "space-bunny",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "response.created",
+      "response.in_progress",
+      "response.output_item.added",
+      "response.reasoning_summary_part.added",
+      "response.reasoning_summary_text.delta",
+      "response.reasoning_summary_text.done",
+      "response.reasoning_summary_part.done",
+      "response.output_item.done",
+      "response.output_item.added",
+      "response.content_part.added",
+      "response.output_text.delta",
+      "response.output_text.done",
+      "response.content_part.done",
+      "response.output_item.done",
+      "response.completed"
+    ]
+  },
+  {
+    "model": "space-bunny",
+    "route": "responses",
+    "stream": true,
+    "input_effort": "xhigh",
+    "status": 200,
+    "capture": {
+      "model": "space-bunny",
+      "reasoning_effort": "xhigh",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "response.created",
+      "response.in_progress",
+      "response.output_item.added",
+      "response.reasoning_summary_part.added",
+      "response.reasoning_summary_text.delta",
+      "response.reasoning_summary_text.done",
+      "response.reasoning_summary_part.done",
+      "response.output_item.done",
+      "response.output_item.added",
+      "response.content_part.added",
+      "response.output_text.delta",
+      "response.output_text.done",
+      "response.content_part.done",
+      "response.output_item.done",
+      "response.completed"
+    ]
+  },
+  {
+    "model": "space-bunny",
+    "route": "responses",
+    "stream": true,
+    "input_effort": "max",
+    "status": 200,
+    "capture": {
+      "model": "space-bunny",
+      "reasoning_effort": "max",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "response.created",
+      "response.in_progress",
+      "response.output_item.added",
+      "response.reasoning_summary_part.added",
+      "response.reasoning_summary_text.delta",
+      "response.reasoning_summary_text.done",
+      "response.reasoning_summary_part.done",
+      "response.output_item.done",
+      "response.output_item.added",
+      "response.content_part.added",
+      "response.output_text.delta",
+      "response.output_text.done",
+      "response.content_part.done",
+      "response.output_item.done",
+      "response.completed"
+    ]
+  },
+  {
+    "model": "space-bunny",
+    "route": "responses",
+    "stream": true,
+    "input_effort": null,
+    "status": 200,
+    "capture": {
+      "model": "space-bunny",
+      "reasoning_effort": "max",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "response.created",
+      "response.in_progress",
+      "response.output_item.added",
+      "response.reasoning_summary_part.added",
+      "response.reasoning_summary_text.delta",
+      "response.reasoning_summary_text.done",
+      "response.reasoning_summary_part.done",
+      "response.output_item.done",
+      "response.output_item.added",
+      "response.content_part.added",
+      "response.output_text.delta",
+      "response.output_text.done",
+      "response.content_part.done",
+      "response.output_item.done",
+      "response.completed"
+    ]
+  },
+  {
+    "model": "space-bunny",
+    "route": "responses",
+    "stream": false,
+    "input_effort": "low",
+    "status": 200,
+    "capture": {
+      "model": "space-bunny",
+      "reasoning_effort": "low",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "space-bunny",
+    "route": "responses",
+    "stream": false,
+    "input_effort": "medium",
+    "status": 200,
+    "capture": {
+      "model": "space-bunny",
+      "reasoning_effort": "medium",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "space-bunny",
+    "route": "responses",
+    "stream": false,
+    "input_effort": "high",
+    "status": 200,
+    "capture": {
+      "model": "space-bunny",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "space-bunny",
+    "route": "responses",
+    "stream": false,
+    "input_effort": "xhigh",
+    "status": 200,
+    "capture": {
+      "model": "space-bunny",
+      "reasoning_effort": "xhigh",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "space-bunny",
+    "route": "responses",
+    "stream": false,
+    "input_effort": "max",
+    "status": 200,
+    "capture": {
+      "model": "space-bunny",
+      "reasoning_effort": "max",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "space-bunny",
+    "route": "responses",
+    "stream": false,
+    "input_effort": null,
+    "status": 200,
+    "capture": {
+      "model": "space-bunny",
+      "reasoning_effort": "max",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "space-bunny",
+    "route": "chat/completions",
+    "stream": true,
+    "input_effort": "low",
+    "status": 200,
+    "capture": {
+      "model": "space-bunny",
+      "reasoning_effort": "low",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "",
+      "",
+      ""
+    ]
+  },
+  {
+    "model": "space-bunny",
+    "route": "chat/completions",
+    "stream": true,
+    "input_effort": "medium",
+    "status": 200,
+    "capture": {
+      "model": "space-bunny",
+      "reasoning_effort": "medium",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "",
+      "",
+      ""
+    ]
+  },
+  {
+    "model": "space-bunny",
+    "route": "chat/completions",
+    "stream": true,
+    "input_effort": "high",
+    "status": 200,
+    "capture": {
+      "model": "space-bunny",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "",
+      "",
+      ""
+    ]
+  },
+  {
+    "model": "space-bunny",
+    "route": "chat/completions",
+    "stream": true,
+    "input_effort": "xhigh",
+    "status": 200,
+    "capture": {
+      "model": "space-bunny",
+      "reasoning_effort": "xhigh",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "",
+      "",
+      ""
+    ]
+  },
+  {
+    "model": "space-bunny",
+    "route": "chat/completions",
+    "stream": true,
+    "input_effort": "max",
+    "status": 200,
+    "capture": {
+      "model": "space-bunny",
+      "reasoning_effort": "max",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "",
+      "",
+      ""
+    ]
+  },
+  {
+    "model": "space-bunny",
+    "route": "chat/completions",
+    "stream": true,
+    "input_effort": null,
+    "status": 200,
+    "capture": {
+      "model": "space-bunny",
+      "reasoning_effort": "max",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "",
+      "",
+      ""
+    ]
+  },
+  {
+    "model": "space-bunny",
+    "route": "chat/completions",
+    "stream": false,
+    "input_effort": "low",
+    "status": 200,
+    "capture": {
+      "model": "space-bunny",
+      "reasoning_effort": "low",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "space-bunny",
+    "route": "chat/completions",
+    "stream": false,
+    "input_effort": "medium",
+    "status": 200,
+    "capture": {
+      "model": "space-bunny",
+      "reasoning_effort": "medium",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "space-bunny",
+    "route": "chat/completions",
+    "stream": false,
+    "input_effort": "high",
+    "status": 200,
+    "capture": {
+      "model": "space-bunny",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "space-bunny",
+    "route": "chat/completions",
+    "stream": false,
+    "input_effort": "xhigh",
+    "status": 200,
+    "capture": {
+      "model": "space-bunny",
+      "reasoning_effort": "xhigh",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "space-bunny",
+    "route": "chat/completions",
+    "stream": false,
+    "input_effort": "max",
+    "status": 200,
+    "capture": {
+      "model": "space-bunny",
+      "reasoning_effort": "max",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "space-bunny",
+    "route": "chat/completions",
+    "stream": false,
+    "input_effort": null,
+    "status": 200,
+    "capture": {
+      "model": "space-bunny",
+      "reasoning_effort": "max",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "minimax-m3.1-flash",
+    "route": "responses",
+    "stream": true,
+    "input_effort": "low",
+    "status": 200,
+    "capture": {
+      "model": "minimax-m3.1-flash",
+      "reasoning_effort": "low",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "response.created",
+      "response.in_progress",
+      "response.output_item.added",
+      "response.reasoning_summary_part.added",
+      "response.reasoning_summary_text.delta",
+      "response.reasoning_summary_text.done",
+      "response.reasoning_summary_part.done",
+      "response.output_item.done",
+      "response.output_item.added",
+      "response.content_part.added",
+      "response.output_text.delta",
+      "response.output_text.done",
+      "response.content_part.done",
+      "response.output_item.done",
+      "response.completed"
+    ]
+  },
+  {
+    "model": "minimax-m3.1-flash",
+    "route": "responses",
+    "stream": true,
+    "input_effort": "medium",
+    "status": 200,
+    "capture": {
+      "model": "minimax-m3.1-flash",
+      "reasoning_effort": "medium",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "response.created",
+      "response.in_progress",
+      "response.output_item.added",
+      "response.reasoning_summary_part.added",
+      "response.reasoning_summary_text.delta",
+      "response.reasoning_summary_text.done",
+      "response.reasoning_summary_part.done",
+      "response.output_item.done",
+      "response.output_item.added",
+      "response.content_part.added",
+      "response.output_text.delta",
+      "response.output_text.done",
+      "response.content_part.done",
+      "response.output_item.done",
+      "response.completed"
+    ]
+  },
+  {
+    "model": "minimax-m3.1-flash",
+    "route": "responses",
+    "stream": true,
+    "input_effort": "high",
+    "status": 200,
+    "capture": {
+      "model": "minimax-m3.1-flash",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "response.created",
+      "response.in_progress",
+      "response.output_item.added",
+      "response.reasoning_summary_part.added",
+      "response.reasoning_summary_text.delta",
+      "response.reasoning_summary_text.done",
+      "response.reasoning_summary_part.done",
+      "response.output_item.done",
+      "response.output_item.added",
+      "response.content_part.added",
+      "response.output_text.delta",
+      "response.output_text.done",
+      "response.content_part.done",
+      "response.output_item.done",
+      "response.completed"
+    ]
+  },
+  {
+    "model": "minimax-m3.1-flash",
+    "route": "responses",
+    "stream": true,
+    "input_effort": "xhigh",
+    "status": 200,
+    "capture": {
+      "model": "minimax-m3.1-flash",
+      "reasoning_effort": "xhigh",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "response.created",
+      "response.in_progress",
+      "response.output_item.added",
+      "response.reasoning_summary_part.added",
+      "response.reasoning_summary_text.delta",
+      "response.reasoning_summary_text.done",
+      "response.reasoning_summary_part.done",
+      "response.output_item.done",
+      "response.output_item.added",
+      "response.content_part.added",
+      "response.output_text.delta",
+      "response.output_text.done",
+      "response.content_part.done",
+      "response.output_item.done",
+      "response.completed"
+    ]
+  },
+  {
+    "model": "minimax-m3.1-flash",
+    "route": "responses",
+    "stream": true,
+    "input_effort": "max",
+    "status": 200,
+    "capture": {
+      "model": "minimax-m3.1-flash",
+      "reasoning_effort": "max",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "response.created",
+      "response.in_progress",
+      "response.output_item.added",
+      "response.reasoning_summary_part.added",
+      "response.reasoning_summary_text.delta",
+      "response.reasoning_summary_text.done",
+      "response.reasoning_summary_part.done",
+      "response.output_item.done",
+      "response.output_item.added",
+      "response.content_part.added",
+      "response.output_text.delta",
+      "response.output_text.done",
+      "response.content_part.done",
+      "response.output_item.done",
+      "response.completed"
+    ]
+  },
+  {
+    "model": "minimax-m3.1-flash",
+    "route": "responses",
+    "stream": true,
+    "input_effort": null,
+    "status": 200,
+    "capture": {
+      "model": "minimax-m3.1-flash",
+      "reasoning_effort": "max",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "response.created",
+      "response.in_progress",
+      "response.output_item.added",
+      "response.reasoning_summary_part.added",
+      "response.reasoning_summary_text.delta",
+      "response.reasoning_summary_text.done",
+      "response.reasoning_summary_part.done",
+      "response.output_item.done",
+      "response.output_item.added",
+      "response.content_part.added",
+      "response.output_text.delta",
+      "response.output_text.done",
+      "response.content_part.done",
+      "response.output_item.done",
+      "response.completed"
+    ]
+  },
+  {
+    "model": "minimax-m3.1-flash",
+    "route": "responses",
+    "stream": false,
+    "input_effort": "low",
+    "status": 200,
+    "capture": {
+      "model": "minimax-m3.1-flash",
+      "reasoning_effort": "low",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "minimax-m3.1-flash",
+    "route": "responses",
+    "stream": false,
+    "input_effort": "medium",
+    "status": 200,
+    "capture": {
+      "model": "minimax-m3.1-flash",
+      "reasoning_effort": "medium",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "minimax-m3.1-flash",
+    "route": "responses",
+    "stream": false,
+    "input_effort": "high",
+    "status": 200,
+    "capture": {
+      "model": "minimax-m3.1-flash",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "minimax-m3.1-flash",
+    "route": "responses",
+    "stream": false,
+    "input_effort": "xhigh",
+    "status": 200,
+    "capture": {
+      "model": "minimax-m3.1-flash",
+      "reasoning_effort": "xhigh",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "minimax-m3.1-flash",
+    "route": "responses",
+    "stream": false,
+    "input_effort": "max",
+    "status": 200,
+    "capture": {
+      "model": "minimax-m3.1-flash",
+      "reasoning_effort": "max",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "minimax-m3.1-flash",
+    "route": "responses",
+    "stream": false,
+    "input_effort": null,
+    "status": 200,
+    "capture": {
+      "model": "minimax-m3.1-flash",
+      "reasoning_effort": "max",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "minimax-m3.1-flash",
+    "route": "chat/completions",
+    "stream": true,
+    "input_effort": "low",
+    "status": 200,
+    "capture": {
+      "model": "minimax-m3.1-flash",
+      "reasoning_effort": "low",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "",
+      "",
+      ""
+    ]
+  },
+  {
+    "model": "minimax-m3.1-flash",
+    "route": "chat/completions",
+    "stream": true,
+    "input_effort": "medium",
+    "status": 200,
+    "capture": {
+      "model": "minimax-m3.1-flash",
+      "reasoning_effort": "medium",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "",
+      "",
+      ""
+    ]
+  },
+  {
+    "model": "minimax-m3.1-flash",
+    "route": "chat/completions",
+    "stream": true,
+    "input_effort": "high",
+    "status": 200,
+    "capture": {
+      "model": "minimax-m3.1-flash",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "",
+      "",
+      ""
+    ]
+  },
+  {
+    "model": "minimax-m3.1-flash",
+    "route": "chat/completions",
+    "stream": true,
+    "input_effort": "xhigh",
+    "status": 200,
+    "capture": {
+      "model": "minimax-m3.1-flash",
+      "reasoning_effort": "xhigh",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "",
+      "",
+      ""
+    ]
+  },
+  {
+    "model": "minimax-m3.1-flash",
+    "route": "chat/completions",
+    "stream": true,
+    "input_effort": "max",
+    "status": 200,
+    "capture": {
+      "model": "minimax-m3.1-flash",
+      "reasoning_effort": "max",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "",
+      "",
+      ""
+    ]
+  },
+  {
+    "model": "minimax-m3.1-flash",
+    "route": "chat/completions",
+    "stream": true,
+    "input_effort": null,
+    "status": 200,
+    "capture": {
+      "model": "minimax-m3.1-flash",
+      "reasoning_effort": "max",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "",
+      "",
+      ""
+    ]
+  },
+  {
+    "model": "minimax-m3.1-flash",
+    "route": "chat/completions",
+    "stream": false,
+    "input_effort": "low",
+    "status": 200,
+    "capture": {
+      "model": "minimax-m3.1-flash",
+      "reasoning_effort": "low",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "minimax-m3.1-flash",
+    "route": "chat/completions",
+    "stream": false,
+    "input_effort": "medium",
+    "status": 200,
+    "capture": {
+      "model": "minimax-m3.1-flash",
+      "reasoning_effort": "medium",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "minimax-m3.1-flash",
+    "route": "chat/completions",
+    "stream": false,
+    "input_effort": "high",
+    "status": 200,
+    "capture": {
+      "model": "minimax-m3.1-flash",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "minimax-m3.1-flash",
+    "route": "chat/completions",
+    "stream": false,
+    "input_effort": "xhigh",
+    "status": 200,
+    "capture": {
+      "model": "minimax-m3.1-flash",
+      "reasoning_effort": "xhigh",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "minimax-m3.1-flash",
+    "route": "chat/completions",
+    "stream": false,
+    "input_effort": "max",
+    "status": 200,
+    "capture": {
+      "model": "minimax-m3.1-flash",
+      "reasoning_effort": "max",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "minimax-m3.1-flash",
+    "route": "chat/completions",
+    "stream": false,
+    "input_effort": null,
+    "status": 200,
+    "capture": {
+      "model": "minimax-m3.1-flash",
+      "reasoning_effort": "max",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "step-5-preview",
+    "route": "responses",
+    "stream": true,
+    "input_effort": "low",
+    "status": 200,
+    "capture": {
+      "model": "step-5-preview",
+      "reasoning_effort": "low",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "response.created",
+      "response.in_progress",
+      "response.output_item.added",
+      "response.reasoning_summary_part.added",
+      "response.reasoning_summary_text.delta",
+      "response.reasoning_summary_text.done",
+      "response.reasoning_summary_part.done",
+      "response.output_item.done",
+      "response.output_item.added",
+      "response.content_part.added",
+      "response.output_text.delta",
+      "response.output_text.done",
+      "response.content_part.done",
+      "response.output_item.done",
+      "response.completed"
+    ]
+  },
+  {
+    "model": "step-5-preview",
+    "route": "responses",
+    "stream": true,
+    "input_effort": "medium",
+    "status": 200,
+    "capture": {
+      "model": "step-5-preview",
+      "reasoning_effort": "medium",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "response.created",
+      "response.in_progress",
+      "response.output_item.added",
+      "response.reasoning_summary_part.added",
+      "response.reasoning_summary_text.delta",
+      "response.reasoning_summary_text.done",
+      "response.reasoning_summary_part.done",
+      "response.output_item.done",
+      "response.output_item.added",
+      "response.content_part.added",
+      "response.output_text.delta",
+      "response.output_text.done",
+      "response.content_part.done",
+      "response.output_item.done",
+      "response.completed"
+    ]
+  },
+  {
+    "model": "step-5-preview",
+    "route": "responses",
+    "stream": true,
+    "input_effort": "high",
+    "status": 200,
+    "capture": {
+      "model": "step-5-preview",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "response.created",
+      "response.in_progress",
+      "response.output_item.added",
+      "response.reasoning_summary_part.added",
+      "response.reasoning_summary_text.delta",
+      "response.reasoning_summary_text.done",
+      "response.reasoning_summary_part.done",
+      "response.output_item.done",
+      "response.output_item.added",
+      "response.content_part.added",
+      "response.output_text.delta",
+      "response.output_text.done",
+      "response.content_part.done",
+      "response.output_item.done",
+      "response.completed"
+    ]
+  },
+  {
+    "model": "step-5-preview",
+    "route": "responses",
+    "stream": true,
+    "input_effort": null,
+    "status": 200,
+    "capture": {
+      "model": "step-5-preview",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "response.created",
+      "response.in_progress",
+      "response.output_item.added",
+      "response.reasoning_summary_part.added",
+      "response.reasoning_summary_text.delta",
+      "response.reasoning_summary_text.done",
+      "response.reasoning_summary_part.done",
+      "response.output_item.done",
+      "response.output_item.added",
+      "response.content_part.added",
+      "response.output_text.delta",
+      "response.output_text.done",
+      "response.content_part.done",
+      "response.output_item.done",
+      "response.completed"
+    ]
+  },
+  {
+    "model": "step-5-preview",
+    "route": "responses",
+    "stream": false,
+    "input_effort": "low",
+    "status": 200,
+    "capture": {
+      "model": "step-5-preview",
+      "reasoning_effort": "low",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "step-5-preview",
+    "route": "responses",
+    "stream": false,
+    "input_effort": "medium",
+    "status": 200,
+    "capture": {
+      "model": "step-5-preview",
+      "reasoning_effort": "medium",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "step-5-preview",
+    "route": "responses",
+    "stream": false,
+    "input_effort": "high",
+    "status": 200,
+    "capture": {
+      "model": "step-5-preview",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "step-5-preview",
+    "route": "responses",
+    "stream": false,
+    "input_effort": null,
+    "status": 200,
+    "capture": {
+      "model": "step-5-preview",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "step-5-preview",
+    "route": "chat/completions",
+    "stream": true,
+    "input_effort": "low",
+    "status": 200,
+    "capture": {
+      "model": "step-5-preview",
+      "reasoning_effort": "low",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "",
+      "",
+      ""
+    ]
+  },
+  {
+    "model": "step-5-preview",
+    "route": "chat/completions",
+    "stream": true,
+    "input_effort": "medium",
+    "status": 200,
+    "capture": {
+      "model": "step-5-preview",
+      "reasoning_effort": "medium",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "",
+      "",
+      ""
+    ]
+  },
+  {
+    "model": "step-5-preview",
+    "route": "chat/completions",
+    "stream": true,
+    "input_effort": "high",
+    "status": 200,
+    "capture": {
+      "model": "step-5-preview",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "",
+      "",
+      ""
+    ]
+  },
+  {
+    "model": "step-5-preview",
+    "route": "chat/completions",
+    "stream": true,
+    "input_effort": null,
+    "status": 200,
+    "capture": {
+      "model": "step-5-preview",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "",
+      "",
+      ""
+    ]
+  },
+  {
+    "model": "step-5-preview",
+    "route": "chat/completions",
+    "stream": false,
+    "input_effort": "low",
+    "status": 200,
+    "capture": {
+      "model": "step-5-preview",
+      "reasoning_effort": "low",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "step-5-preview",
+    "route": "chat/completions",
+    "stream": false,
+    "input_effort": "medium",
+    "status": 200,
+    "capture": {
+      "model": "step-5-preview",
+      "reasoning_effort": "medium",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "step-5-preview",
+    "route": "chat/completions",
+    "stream": false,
+    "input_effort": "high",
+    "status": 200,
+    "capture": {
+      "model": "step-5-preview",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "step-5-preview",
+    "route": "chat/completions",
+    "stream": false,
+    "input_effort": null,
+    "status": 200,
+    "capture": {
+      "model": "step-5-preview",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "kimi-k3-2",
+    "route": "responses",
+    "stream": true,
+    "input_effort": "low",
+    "status": 200,
+    "capture": {
+      "model": "kimi-k3-2",
+      "reasoning_effort": "low",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "response.created",
+      "response.in_progress",
+      "response.output_item.added",
+      "response.reasoning_summary_part.added",
+      "response.reasoning_summary_text.delta",
+      "response.reasoning_summary_text.done",
+      "response.reasoning_summary_part.done",
+      "response.output_item.done",
+      "response.output_item.added",
+      "response.content_part.added",
+      "response.output_text.delta",
+      "response.output_text.done",
+      "response.content_part.done",
+      "response.output_item.done",
+      "response.completed"
+    ]
+  },
+  {
+    "model": "kimi-k3-2",
+    "route": "responses",
+    "stream": true,
+    "input_effort": "high",
+    "status": 200,
+    "capture": {
+      "model": "kimi-k3-2",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "response.created",
+      "response.in_progress",
+      "response.output_item.added",
+      "response.reasoning_summary_part.added",
+      "response.reasoning_summary_text.delta",
+      "response.reasoning_summary_text.done",
+      "response.reasoning_summary_part.done",
+      "response.output_item.done",
+      "response.output_item.added",
+      "response.content_part.added",
+      "response.output_text.delta",
+      "response.output_text.done",
+      "response.content_part.done",
+      "response.output_item.done",
+      "response.completed"
+    ]
+  },
+  {
+    "model": "kimi-k3-2",
+    "route": "responses",
+    "stream": true,
+    "input_effort": "xhigh",
+    "status": 200,
+    "capture": {
+      "model": "kimi-k3-2",
+      "reasoning_effort": "xhigh",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "response.created",
+      "response.in_progress",
+      "response.output_item.added",
+      "response.reasoning_summary_part.added",
+      "response.reasoning_summary_text.delta",
+      "response.reasoning_summary_text.done",
+      "response.reasoning_summary_part.done",
+      "response.output_item.done",
+      "response.output_item.added",
+      "response.content_part.added",
+      "response.output_text.delta",
+      "response.output_text.done",
+      "response.content_part.done",
+      "response.output_item.done",
+      "response.completed"
+    ]
+  },
+  {
+    "model": "kimi-k3-2",
+    "route": "responses",
+    "stream": true,
+    "input_effort": null,
+    "status": 200,
+    "capture": {
+      "model": "kimi-k3-2",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "response.created",
+      "response.in_progress",
+      "response.output_item.added",
+      "response.reasoning_summary_part.added",
+      "response.reasoning_summary_text.delta",
+      "response.reasoning_summary_text.done",
+      "response.reasoning_summary_part.done",
+      "response.output_item.done",
+      "response.output_item.added",
+      "response.content_part.added",
+      "response.output_text.delta",
+      "response.output_text.done",
+      "response.content_part.done",
+      "response.output_item.done",
+      "response.completed"
+    ]
+  },
+  {
+    "model": "kimi-k3-2",
+    "route": "responses",
+    "stream": false,
+    "input_effort": "low",
+    "status": 200,
+    "capture": {
+      "model": "kimi-k3-2",
+      "reasoning_effort": "low",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "kimi-k3-2",
+    "route": "responses",
+    "stream": false,
+    "input_effort": "high",
+    "status": 200,
+    "capture": {
+      "model": "kimi-k3-2",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "kimi-k3-2",
+    "route": "responses",
+    "stream": false,
+    "input_effort": "xhigh",
+    "status": 200,
+    "capture": {
+      "model": "kimi-k3-2",
+      "reasoning_effort": "xhigh",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "kimi-k3-2",
+    "route": "responses",
+    "stream": false,
+    "input_effort": null,
+    "status": 200,
+    "capture": {
+      "model": "kimi-k3-2",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "kimi-k3-2",
+    "route": "chat/completions",
+    "stream": true,
+    "input_effort": "low",
+    "status": 200,
+    "capture": {
+      "model": "kimi-k3-2",
+      "reasoning_effort": "low",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "",
+      "",
+      ""
+    ]
+  },
+  {
+    "model": "kimi-k3-2",
+    "route": "chat/completions",
+    "stream": true,
+    "input_effort": "high",
+    "status": 200,
+    "capture": {
+      "model": "kimi-k3-2",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "",
+      "",
+      ""
+    ]
+  },
+  {
+    "model": "kimi-k3-2",
+    "route": "chat/completions",
+    "stream": true,
+    "input_effort": "xhigh",
+    "status": 200,
+    "capture": {
+      "model": "kimi-k3-2",
+      "reasoning_effort": "xhigh",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "",
+      "",
+      ""
+    ]
+  },
+  {
+    "model": "kimi-k3-2",
+    "route": "chat/completions",
+    "stream": true,
+    "input_effort": null,
+    "status": 200,
+    "capture": {
+      "model": "kimi-k3-2",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "",
+      "",
+      ""
+    ]
+  },
+  {
+    "model": "kimi-k3-2",
+    "route": "chat/completions",
+    "stream": false,
+    "input_effort": "low",
+    "status": 200,
+    "capture": {
+      "model": "kimi-k3-2",
+      "reasoning_effort": "low",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "kimi-k3-2",
+    "route": "chat/completions",
+    "stream": false,
+    "input_effort": "high",
+    "status": 200,
+    "capture": {
+      "model": "kimi-k3-2",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "kimi-k3-2",
+    "route": "chat/completions",
+    "stream": false,
+    "input_effort": "xhigh",
+    "status": 200,
+    "capture": {
+      "model": "kimi-k3-2",
+      "reasoning_effort": "xhigh",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "kimi-k3-2",
+    "route": "chat/completions",
+    "stream": false,
+    "input_effort": null,
+    "status": 200,
+    "capture": {
+      "model": "kimi-k3-2",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "kimi-k3-1",
+    "route": "responses",
+    "stream": true,
+    "input_effort": "low",
+    "status": 200,
+    "capture": {
+      "model": "kimi-k3-1",
+      "reasoning_effort": "low",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "response.created",
+      "response.in_progress",
+      "response.output_item.added",
+      "response.reasoning_summary_part.added",
+      "response.reasoning_summary_text.delta",
+      "response.reasoning_summary_text.done",
+      "response.reasoning_summary_part.done",
+      "response.output_item.done",
+      "response.output_item.added",
+      "response.content_part.added",
+      "response.output_text.delta",
+      "response.output_text.done",
+      "response.content_part.done",
+      "response.output_item.done",
+      "response.completed"
+    ]
+  },
+  {
+    "model": "kimi-k3-1",
+    "route": "responses",
+    "stream": true,
+    "input_effort": "high",
+    "status": 200,
+    "capture": {
+      "model": "kimi-k3-1",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "response.created",
+      "response.in_progress",
+      "response.output_item.added",
+      "response.reasoning_summary_part.added",
+      "response.reasoning_summary_text.delta",
+      "response.reasoning_summary_text.done",
+      "response.reasoning_summary_part.done",
+      "response.output_item.done",
+      "response.output_item.added",
+      "response.content_part.added",
+      "response.output_text.delta",
+      "response.output_text.done",
+      "response.content_part.done",
+      "response.output_item.done",
+      "response.completed"
+    ]
+  },
+  {
+    "model": "kimi-k3-1",
+    "route": "responses",
+    "stream": true,
+    "input_effort": "xhigh",
+    "status": 200,
+    "capture": {
+      "model": "kimi-k3-1",
+      "reasoning_effort": "xhigh",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "response.created",
+      "response.in_progress",
+      "response.output_item.added",
+      "response.reasoning_summary_part.added",
+      "response.reasoning_summary_text.delta",
+      "response.reasoning_summary_text.done",
+      "response.reasoning_summary_part.done",
+      "response.output_item.done",
+      "response.output_item.added",
+      "response.content_part.added",
+      "response.output_text.delta",
+      "response.output_text.done",
+      "response.content_part.done",
+      "response.output_item.done",
+      "response.completed"
+    ]
+  },
+  {
+    "model": "kimi-k3-1",
+    "route": "responses",
+    "stream": true,
+    "input_effort": null,
+    "status": 200,
+    "capture": {
+      "model": "kimi-k3-1",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "response.created",
+      "response.in_progress",
+      "response.output_item.added",
+      "response.reasoning_summary_part.added",
+      "response.reasoning_summary_text.delta",
+      "response.reasoning_summary_text.done",
+      "response.reasoning_summary_part.done",
+      "response.output_item.done",
+      "response.output_item.added",
+      "response.content_part.added",
+      "response.output_text.delta",
+      "response.output_text.done",
+      "response.content_part.done",
+      "response.output_item.done",
+      "response.completed"
+    ]
+  },
+  {
+    "model": "kimi-k3-1",
+    "route": "responses",
+    "stream": false,
+    "input_effort": "low",
+    "status": 200,
+    "capture": {
+      "model": "kimi-k3-1",
+      "reasoning_effort": "low",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "kimi-k3-1",
+    "route": "responses",
+    "stream": false,
+    "input_effort": "high",
+    "status": 200,
+    "capture": {
+      "model": "kimi-k3-1",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "kimi-k3-1",
+    "route": "responses",
+    "stream": false,
+    "input_effort": "xhigh",
+    "status": 200,
+    "capture": {
+      "model": "kimi-k3-1",
+      "reasoning_effort": "xhigh",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "kimi-k3-1",
+    "route": "responses",
+    "stream": false,
+    "input_effort": null,
+    "status": 200,
+    "capture": {
+      "model": "kimi-k3-1",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "kimi-k3-1",
+    "route": "chat/completions",
+    "stream": true,
+    "input_effort": "low",
+    "status": 200,
+    "capture": {
+      "model": "kimi-k3-1",
+      "reasoning_effort": "low",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "",
+      "",
+      ""
+    ]
+  },
+  {
+    "model": "kimi-k3-1",
+    "route": "chat/completions",
+    "stream": true,
+    "input_effort": "high",
+    "status": 200,
+    "capture": {
+      "model": "kimi-k3-1",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "",
+      "",
+      ""
+    ]
+  },
+  {
+    "model": "kimi-k3-1",
+    "route": "chat/completions",
+    "stream": true,
+    "input_effort": "xhigh",
+    "status": 200,
+    "capture": {
+      "model": "kimi-k3-1",
+      "reasoning_effort": "xhigh",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "",
+      "",
+      ""
+    ]
+  },
+  {
+    "model": "kimi-k3-1",
+    "route": "chat/completions",
+    "stream": true,
+    "input_effort": null,
+    "status": 200,
+    "capture": {
+      "model": "kimi-k3-1",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "",
+      "",
+      ""
+    ]
+  },
+  {
+    "model": "kimi-k3-1",
+    "route": "chat/completions",
+    "stream": false,
+    "input_effort": "low",
+    "status": 200,
+    "capture": {
+      "model": "kimi-k3-1",
+      "reasoning_effort": "low",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "kimi-k3-1",
+    "route": "chat/completions",
+    "stream": false,
+    "input_effort": "high",
+    "status": 200,
+    "capture": {
+      "model": "kimi-k3-1",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "kimi-k3-1",
+    "route": "chat/completions",
+    "stream": false,
+    "input_effort": "xhigh",
+    "status": 200,
+    "capture": {
+      "model": "kimi-k3-1",
+      "reasoning_effort": "xhigh",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "kimi-k3-1",
+    "route": "chat/completions",
+    "stream": false,
+    "input_effort": null,
+    "status": 200,
+    "capture": {
+      "model": "kimi-k3-1",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "glm-5.3",
+    "route": "responses",
+    "stream": true,
+    "input_effort": "low",
+    "status": 200,
+    "capture": {
+      "model": "glm-5.3",
+      "reasoning_effort": "low",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "response.created",
+      "response.in_progress",
+      "response.output_item.added",
+      "response.reasoning_summary_part.added",
+      "response.reasoning_summary_text.delta",
+      "response.reasoning_summary_text.done",
+      "response.reasoning_summary_part.done",
+      "response.output_item.done",
+      "response.output_item.added",
+      "response.content_part.added",
+      "response.output_text.delta",
+      "response.output_text.done",
+      "response.content_part.done",
+      "response.output_item.done",
+      "response.completed"
+    ]
+  },
+  {
+    "model": "glm-5.3",
+    "route": "responses",
+    "stream": true,
+    "input_effort": "high",
+    "status": 200,
+    "capture": {
+      "model": "glm-5.3",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "response.created",
+      "response.in_progress",
+      "response.output_item.added",
+      "response.reasoning_summary_part.added",
+      "response.reasoning_summary_text.delta",
+      "response.reasoning_summary_text.done",
+      "response.reasoning_summary_part.done",
+      "response.output_item.done",
+      "response.output_item.added",
+      "response.content_part.added",
+      "response.output_text.delta",
+      "response.output_text.done",
+      "response.content_part.done",
+      "response.output_item.done",
+      "response.completed"
+    ]
+  },
+  {
+    "model": "glm-5.3",
+    "route": "responses",
+    "stream": true,
+    "input_effort": "max",
+    "status": 200,
+    "capture": {
+      "model": "glm-5.3",
+      "reasoning_effort": "max",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "response.created",
+      "response.in_progress",
+      "response.output_item.added",
+      "response.reasoning_summary_part.added",
+      "response.reasoning_summary_text.delta",
+      "response.reasoning_summary_text.done",
+      "response.reasoning_summary_part.done",
+      "response.output_item.done",
+      "response.output_item.added",
+      "response.content_part.added",
+      "response.output_text.delta",
+      "response.output_text.done",
+      "response.content_part.done",
+      "response.output_item.done",
+      "response.completed"
+    ]
+  },
+  {
+    "model": "glm-5.3",
+    "route": "responses",
+    "stream": true,
+    "input_effort": null,
+    "status": 200,
+    "capture": {
+      "model": "glm-5.3",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "response.created",
+      "response.in_progress",
+      "response.output_item.added",
+      "response.reasoning_summary_part.added",
+      "response.reasoning_summary_text.delta",
+      "response.reasoning_summary_text.done",
+      "response.reasoning_summary_part.done",
+      "response.output_item.done",
+      "response.output_item.added",
+      "response.content_part.added",
+      "response.output_text.delta",
+      "response.output_text.done",
+      "response.content_part.done",
+      "response.output_item.done",
+      "response.completed"
+    ]
+  },
+  {
+    "model": "glm-5.3",
+    "route": "responses",
+    "stream": false,
+    "input_effort": "low",
+    "status": 200,
+    "capture": {
+      "model": "glm-5.3",
+      "reasoning_effort": "low",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "glm-5.3",
+    "route": "responses",
+    "stream": false,
+    "input_effort": "high",
+    "status": 200,
+    "capture": {
+      "model": "glm-5.3",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "glm-5.3",
+    "route": "responses",
+    "stream": false,
+    "input_effort": "max",
+    "status": 200,
+    "capture": {
+      "model": "glm-5.3",
+      "reasoning_effort": "max",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "glm-5.3",
+    "route": "responses",
+    "stream": false,
+    "input_effort": null,
+    "status": 200,
+    "capture": {
+      "model": "glm-5.3",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "glm-5.3",
+    "route": "chat/completions",
+    "stream": true,
+    "input_effort": "low",
+    "status": 200,
+    "capture": {
+      "model": "glm-5.3",
+      "reasoning_effort": "low",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "",
+      "",
+      ""
+    ]
+  },
+  {
+    "model": "glm-5.3",
+    "route": "chat/completions",
+    "stream": true,
+    "input_effort": "high",
+    "status": 200,
+    "capture": {
+      "model": "glm-5.3",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "",
+      "",
+      ""
+    ]
+  },
+  {
+    "model": "glm-5.3",
+    "route": "chat/completions",
+    "stream": true,
+    "input_effort": "max",
+    "status": 200,
+    "capture": {
+      "model": "glm-5.3",
+      "reasoning_effort": "max",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "",
+      "",
+      ""
+    ]
+  },
+  {
+    "model": "glm-5.3",
+    "route": "chat/completions",
+    "stream": true,
+    "input_effort": null,
+    "status": 200,
+    "capture": {
+      "model": "glm-5.3",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "",
+      "",
+      ""
+    ]
+  },
+  {
+    "model": "glm-5.3",
+    "route": "chat/completions",
+    "stream": false,
+    "input_effort": "low",
+    "status": 200,
+    "capture": {
+      "model": "glm-5.3",
+      "reasoning_effort": "low",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "glm-5.3",
+    "route": "chat/completions",
+    "stream": false,
+    "input_effort": "high",
+    "status": 200,
+    "capture": {
+      "model": "glm-5.3",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "glm-5.3",
+    "route": "chat/completions",
+    "stream": false,
+    "input_effort": "max",
+    "status": 200,
+    "capture": {
+      "model": "glm-5.3",
+      "reasoning_effort": "max",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "glm-5.3",
+    "route": "chat/completions",
+    "stream": false,
+    "input_effort": null,
+    "status": 200,
+    "capture": {
+      "model": "glm-5.3",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "glm-5.3-flash",
+    "route": "responses",
+    "stream": true,
+    "input_effort": "low",
+    "status": 200,
+    "capture": {
+      "model": "glm-5.3-flash",
+      "reasoning_effort": "low",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "response.created",
+      "response.in_progress",
+      "response.output_item.added",
+      "response.reasoning_summary_part.added",
+      "response.reasoning_summary_text.delta",
+      "response.reasoning_summary_text.done",
+      "response.reasoning_summary_part.done",
+      "response.output_item.done",
+      "response.output_item.added",
+      "response.content_part.added",
+      "response.output_text.delta",
+      "response.output_text.done",
+      "response.content_part.done",
+      "response.output_item.done",
+      "response.completed"
+    ]
+  },
+  {
+    "model": "glm-5.3-flash",
+    "route": "responses",
+    "stream": true,
+    "input_effort": "high",
+    "status": 200,
+    "capture": {
+      "model": "glm-5.3-flash",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "response.created",
+      "response.in_progress",
+      "response.output_item.added",
+      "response.reasoning_summary_part.added",
+      "response.reasoning_summary_text.delta",
+      "response.reasoning_summary_text.done",
+      "response.reasoning_summary_part.done",
+      "response.output_item.done",
+      "response.output_item.added",
+      "response.content_part.added",
+      "response.output_text.delta",
+      "response.output_text.done",
+      "response.content_part.done",
+      "response.output_item.done",
+      "response.completed"
+    ]
+  },
+  {
+    "model": "glm-5.3-flash",
+    "route": "responses",
+    "stream": true,
+    "input_effort": "max",
+    "status": 200,
+    "capture": {
+      "model": "glm-5.3-flash",
+      "reasoning_effort": "max",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "response.created",
+      "response.in_progress",
+      "response.output_item.added",
+      "response.reasoning_summary_part.added",
+      "response.reasoning_summary_text.delta",
+      "response.reasoning_summary_text.done",
+      "response.reasoning_summary_part.done",
+      "response.output_item.done",
+      "response.output_item.added",
+      "response.content_part.added",
+      "response.output_text.delta",
+      "response.output_text.done",
+      "response.content_part.done",
+      "response.output_item.done",
+      "response.completed"
+    ]
+  },
+  {
+    "model": "glm-5.3-flash",
+    "route": "responses",
+    "stream": true,
+    "input_effort": null,
+    "status": 200,
+    "capture": {
+      "model": "glm-5.3-flash",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "response.created",
+      "response.in_progress",
+      "response.output_item.added",
+      "response.reasoning_summary_part.added",
+      "response.reasoning_summary_text.delta",
+      "response.reasoning_summary_text.done",
+      "response.reasoning_summary_part.done",
+      "response.output_item.done",
+      "response.output_item.added",
+      "response.content_part.added",
+      "response.output_text.delta",
+      "response.output_text.done",
+      "response.content_part.done",
+      "response.output_item.done",
+      "response.completed"
+    ]
+  },
+  {
+    "model": "glm-5.3-flash",
+    "route": "responses",
+    "stream": false,
+    "input_effort": "low",
+    "status": 200,
+    "capture": {
+      "model": "glm-5.3-flash",
+      "reasoning_effort": "low",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "glm-5.3-flash",
+    "route": "responses",
+    "stream": false,
+    "input_effort": "high",
+    "status": 200,
+    "capture": {
+      "model": "glm-5.3-flash",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "glm-5.3-flash",
+    "route": "responses",
+    "stream": false,
+    "input_effort": "max",
+    "status": 200,
+    "capture": {
+      "model": "glm-5.3-flash",
+      "reasoning_effort": "max",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "glm-5.3-flash",
+    "route": "responses",
+    "stream": false,
+    "input_effort": null,
+    "status": 200,
+    "capture": {
+      "model": "glm-5.3-flash",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "glm-5.3-flash",
+    "route": "chat/completions",
+    "stream": true,
+    "input_effort": "low",
+    "status": 200,
+    "capture": {
+      "model": "glm-5.3-flash",
+      "reasoning_effort": "low",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "",
+      "",
+      ""
+    ]
+  },
+  {
+    "model": "glm-5.3-flash",
+    "route": "chat/completions",
+    "stream": true,
+    "input_effort": "high",
+    "status": 200,
+    "capture": {
+      "model": "glm-5.3-flash",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "",
+      "",
+      ""
+    ]
+  },
+  {
+    "model": "glm-5.3-flash",
+    "route": "chat/completions",
+    "stream": true,
+    "input_effort": "max",
+    "status": 200,
+    "capture": {
+      "model": "glm-5.3-flash",
+      "reasoning_effort": "max",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "",
+      "",
+      ""
+    ]
+  },
+  {
+    "model": "glm-5.3-flash",
+    "route": "chat/completions",
+    "stream": true,
+    "input_effort": null,
+    "status": 200,
+    "capture": {
+      "model": "glm-5.3-flash",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "",
+      "",
+      ""
+    ]
+  },
+  {
+    "model": "glm-5.3-flash",
+    "route": "chat/completions",
+    "stream": false,
+    "input_effort": "low",
+    "status": 200,
+    "capture": {
+      "model": "glm-5.3-flash",
+      "reasoning_effort": "low",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "glm-5.3-flash",
+    "route": "chat/completions",
+    "stream": false,
+    "input_effort": "high",
+    "status": 200,
+    "capture": {
+      "model": "glm-5.3-flash",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "glm-5.3-flash",
+    "route": "chat/completions",
+    "stream": false,
+    "input_effort": "max",
+    "status": 200,
+    "capture": {
+      "model": "glm-5.3-flash",
+      "reasoning_effort": "max",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "glm-5.3-flash",
+    "route": "chat/completions",
+    "stream": false,
+    "input_effort": null,
+    "status": 200,
+    "capture": {
+      "model": "glm-5.3-flash",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "kimi-k2.8-preview",
+    "route": "responses",
+    "stream": true,
+    "input_effort": "low",
+    "status": 200,
+    "capture": {
+      "model": "kimi-k2.8-preview",
+      "reasoning_effort": "low",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "response.created",
+      "response.in_progress",
+      "response.output_item.added",
+      "response.reasoning_summary_part.added",
+      "response.reasoning_summary_text.delta",
+      "response.reasoning_summary_text.done",
+      "response.reasoning_summary_part.done",
+      "response.output_item.done",
+      "response.output_item.added",
+      "response.content_part.added",
+      "response.output_text.delta",
+      "response.output_text.done",
+      "response.content_part.done",
+      "response.output_item.done",
+      "response.completed"
+    ]
+  },
+  {
+    "model": "kimi-k2.8-preview",
+    "route": "responses",
+    "stream": true,
+    "input_effort": "high",
+    "status": 200,
+    "capture": {
+      "model": "kimi-k2.8-preview",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "response.created",
+      "response.in_progress",
+      "response.output_item.added",
+      "response.reasoning_summary_part.added",
+      "response.reasoning_summary_text.delta",
+      "response.reasoning_summary_text.done",
+      "response.reasoning_summary_part.done",
+      "response.output_item.done",
+      "response.output_item.added",
+      "response.content_part.added",
+      "response.output_text.delta",
+      "response.output_text.done",
+      "response.content_part.done",
+      "response.output_item.done",
+      "response.completed"
+    ]
+  },
+  {
+    "model": "kimi-k2.8-preview",
+    "route": "responses",
+    "stream": true,
+    "input_effort": "max",
+    "status": 200,
+    "capture": {
+      "model": "kimi-k2.8-preview",
+      "reasoning_effort": "max",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "response.created",
+      "response.in_progress",
+      "response.output_item.added",
+      "response.reasoning_summary_part.added",
+      "response.reasoning_summary_text.delta",
+      "response.reasoning_summary_text.done",
+      "response.reasoning_summary_part.done",
+      "response.output_item.done",
+      "response.output_item.added",
+      "response.content_part.added",
+      "response.output_text.delta",
+      "response.output_text.done",
+      "response.content_part.done",
+      "response.output_item.done",
+      "response.completed"
+    ]
+  },
+  {
+    "model": "kimi-k2.8-preview",
+    "route": "responses",
+    "stream": true,
+    "input_effort": null,
+    "status": 200,
+    "capture": {
+      "model": "kimi-k2.8-preview",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "response.created",
+      "response.in_progress",
+      "response.output_item.added",
+      "response.reasoning_summary_part.added",
+      "response.reasoning_summary_text.delta",
+      "response.reasoning_summary_text.done",
+      "response.reasoning_summary_part.done",
+      "response.output_item.done",
+      "response.output_item.added",
+      "response.content_part.added",
+      "response.output_text.delta",
+      "response.output_text.done",
+      "response.content_part.done",
+      "response.output_item.done",
+      "response.completed"
+    ]
+  },
+  {
+    "model": "kimi-k2.8-preview",
+    "route": "responses",
+    "stream": false,
+    "input_effort": "low",
+    "status": 200,
+    "capture": {
+      "model": "kimi-k2.8-preview",
+      "reasoning_effort": "low",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "kimi-k2.8-preview",
+    "route": "responses",
+    "stream": false,
+    "input_effort": "high",
+    "status": 200,
+    "capture": {
+      "model": "kimi-k2.8-preview",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "kimi-k2.8-preview",
+    "route": "responses",
+    "stream": false,
+    "input_effort": "max",
+    "status": 200,
+    "capture": {
+      "model": "kimi-k2.8-preview",
+      "reasoning_effort": "max",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "kimi-k2.8-preview",
+    "route": "responses",
+    "stream": false,
+    "input_effort": null,
+    "status": 200,
+    "capture": {
+      "model": "kimi-k2.8-preview",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "kimi-k2.8-preview",
+    "route": "chat/completions",
+    "stream": true,
+    "input_effort": "low",
+    "status": 200,
+    "capture": {
+      "model": "kimi-k2.8-preview",
+      "reasoning_effort": "low",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "",
+      "",
+      ""
+    ]
+  },
+  {
+    "model": "kimi-k2.8-preview",
+    "route": "chat/completions",
+    "stream": true,
+    "input_effort": "high",
+    "status": 200,
+    "capture": {
+      "model": "kimi-k2.8-preview",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "",
+      "",
+      ""
+    ]
+  },
+  {
+    "model": "kimi-k2.8-preview",
+    "route": "chat/completions",
+    "stream": true,
+    "input_effort": "max",
+    "status": 200,
+    "capture": {
+      "model": "kimi-k2.8-preview",
+      "reasoning_effort": "max",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "",
+      "",
+      ""
+    ]
+  },
+  {
+    "model": "kimi-k2.8-preview",
+    "route": "chat/completions",
+    "stream": true,
+    "input_effort": null,
+    "status": 200,
+    "capture": {
+      "model": "kimi-k2.8-preview",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "",
+      "",
+      ""
+    ]
+  },
+  {
+    "model": "kimi-k2.8-preview",
+    "route": "chat/completions",
+    "stream": false,
+    "input_effort": "low",
+    "status": 200,
+    "capture": {
+      "model": "kimi-k2.8-preview",
+      "reasoning_effort": "low",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "kimi-k2.8-preview",
+    "route": "chat/completions",
+    "stream": false,
+    "input_effort": "high",
+    "status": 200,
+    "capture": {
+      "model": "kimi-k2.8-preview",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "kimi-k2.8-preview",
+    "route": "chat/completions",
+    "stream": false,
+    "input_effort": "max",
+    "status": 200,
+    "capture": {
+      "model": "kimi-k2.8-preview",
+      "reasoning_effort": "max",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "kimi-k2.8-preview",
+    "route": "chat/completions",
+    "stream": false,
+    "input_effort": null,
+    "status": 200,
+    "capture": {
+      "model": "kimi-k2.8-preview",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "kimi-k3.1-pro",
+    "route": "responses",
+    "stream": true,
+    "input_effort": "low",
+    "status": 200,
+    "capture": {
+      "model": "kimi-k3.1-pro",
+      "reasoning_effort": "low",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "response.created",
+      "response.in_progress",
+      "response.output_item.added",
+      "response.reasoning_summary_part.added",
+      "response.reasoning_summary_text.delta",
+      "response.reasoning_summary_text.done",
+      "response.reasoning_summary_part.done",
+      "response.output_item.done",
+      "response.output_item.added",
+      "response.content_part.added",
+      "response.output_text.delta",
+      "response.output_text.done",
+      "response.content_part.done",
+      "response.output_item.done",
+      "response.completed"
+    ]
+  },
+  {
+    "model": "kimi-k3.1-pro",
+    "route": "responses",
+    "stream": true,
+    "input_effort": "high",
+    "status": 200,
+    "capture": {
+      "model": "kimi-k3.1-pro",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "response.created",
+      "response.in_progress",
+      "response.output_item.added",
+      "response.reasoning_summary_part.added",
+      "response.reasoning_summary_text.delta",
+      "response.reasoning_summary_text.done",
+      "response.reasoning_summary_part.done",
+      "response.output_item.done",
+      "response.output_item.added",
+      "response.content_part.added",
+      "response.output_text.delta",
+      "response.output_text.done",
+      "response.content_part.done",
+      "response.output_item.done",
+      "response.completed"
+    ]
+  },
+  {
+    "model": "kimi-k3.1-pro",
+    "route": "responses",
+    "stream": true,
+    "input_effort": "max",
+    "status": 200,
+    "capture": {
+      "model": "kimi-k3.1-pro",
+      "reasoning_effort": "max",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "response.created",
+      "response.in_progress",
+      "response.output_item.added",
+      "response.reasoning_summary_part.added",
+      "response.reasoning_summary_text.delta",
+      "response.reasoning_summary_text.done",
+      "response.reasoning_summary_part.done",
+      "response.output_item.done",
+      "response.output_item.added",
+      "response.content_part.added",
+      "response.output_text.delta",
+      "response.output_text.done",
+      "response.content_part.done",
+      "response.output_item.done",
+      "response.completed"
+    ]
+  },
+  {
+    "model": "kimi-k3.1-pro",
+    "route": "responses",
+    "stream": true,
+    "input_effort": null,
+    "status": 200,
+    "capture": {
+      "model": "kimi-k3.1-pro",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "response.created",
+      "response.in_progress",
+      "response.output_item.added",
+      "response.reasoning_summary_part.added",
+      "response.reasoning_summary_text.delta",
+      "response.reasoning_summary_text.done",
+      "response.reasoning_summary_part.done",
+      "response.output_item.done",
+      "response.output_item.added",
+      "response.content_part.added",
+      "response.output_text.delta",
+      "response.output_text.done",
+      "response.content_part.done",
+      "response.output_item.done",
+      "response.completed"
+    ]
+  },
+  {
+    "model": "kimi-k3.1-pro",
+    "route": "responses",
+    "stream": false,
+    "input_effort": "low",
+    "status": 200,
+    "capture": {
+      "model": "kimi-k3.1-pro",
+      "reasoning_effort": "low",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "kimi-k3.1-pro",
+    "route": "responses",
+    "stream": false,
+    "input_effort": "high",
+    "status": 200,
+    "capture": {
+      "model": "kimi-k3.1-pro",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "kimi-k3.1-pro",
+    "route": "responses",
+    "stream": false,
+    "input_effort": "max",
+    "status": 200,
+    "capture": {
+      "model": "kimi-k3.1-pro",
+      "reasoning_effort": "max",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "kimi-k3.1-pro",
+    "route": "responses",
+    "stream": false,
+    "input_effort": null,
+    "status": 200,
+    "capture": {
+      "model": "kimi-k3.1-pro",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "kimi-k3.1-pro",
+    "route": "chat/completions",
+    "stream": true,
+    "input_effort": "low",
+    "status": 200,
+    "capture": {
+      "model": "kimi-k3.1-pro",
+      "reasoning_effort": "low",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "",
+      "",
+      ""
+    ]
+  },
+  {
+    "model": "kimi-k3.1-pro",
+    "route": "chat/completions",
+    "stream": true,
+    "input_effort": "high",
+    "status": 200,
+    "capture": {
+      "model": "kimi-k3.1-pro",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "",
+      "",
+      ""
+    ]
+  },
+  {
+    "model": "kimi-k3.1-pro",
+    "route": "chat/completions",
+    "stream": true,
+    "input_effort": "max",
+    "status": 200,
+    "capture": {
+      "model": "kimi-k3.1-pro",
+      "reasoning_effort": "max",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "",
+      "",
+      ""
+    ]
+  },
+  {
+    "model": "kimi-k3.1-pro",
+    "route": "chat/completions",
+    "stream": true,
+    "input_effort": null,
+    "status": 200,
+    "capture": {
+      "model": "kimi-k3.1-pro",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "",
+      "",
+      ""
+    ]
+  },
+  {
+    "model": "kimi-k3.1-pro",
+    "route": "chat/completions",
+    "stream": false,
+    "input_effort": "low",
+    "status": 200,
+    "capture": {
+      "model": "kimi-k3.1-pro",
+      "reasoning_effort": "low",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "kimi-k3.1-pro",
+    "route": "chat/completions",
+    "stream": false,
+    "input_effort": "high",
+    "status": 200,
+    "capture": {
+      "model": "kimi-k3.1-pro",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "kimi-k3.1-pro",
+    "route": "chat/completions",
+    "stream": false,
+    "input_effort": "max",
+    "status": 200,
+    "capture": {
+      "model": "kimi-k3.1-pro",
+      "reasoning_effort": "max",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "kimi-k3.1-pro",
+    "route": "chat/completions",
+    "stream": false,
+    "input_effort": null,
+    "status": 200,
+    "capture": {
+      "model": "kimi-k3.1-pro",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "glm-5.2",
+    "route": "responses",
+    "stream": true,
+    "input_effort": "high",
+    "status": 200,
+    "capture": {
+      "model": "glm-5.2",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "response.created",
+      "response.in_progress",
+      "response.output_item.added",
+      "response.reasoning_summary_part.added",
+      "response.reasoning_summary_text.delta",
+      "response.reasoning_summary_text.done",
+      "response.reasoning_summary_part.done",
+      "response.output_item.done",
+      "response.output_item.added",
+      "response.content_part.added",
+      "response.output_text.delta",
+      "response.output_text.done",
+      "response.content_part.done",
+      "response.output_item.done",
+      "response.completed"
+    ]
+  },
+  {
+    "model": "glm-5.2",
+    "route": "responses",
+    "stream": true,
+    "input_effort": "xhigh",
+    "status": 200,
+    "capture": {
+      "model": "glm-5.2",
+      "reasoning_effort": "xhigh",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "response.created",
+      "response.in_progress",
+      "response.output_item.added",
+      "response.reasoning_summary_part.added",
+      "response.reasoning_summary_text.delta",
+      "response.reasoning_summary_text.done",
+      "response.reasoning_summary_part.done",
+      "response.output_item.done",
+      "response.output_item.added",
+      "response.content_part.added",
+      "response.output_text.delta",
+      "response.output_text.done",
+      "response.content_part.done",
+      "response.output_item.done",
+      "response.completed"
+    ]
+  },
+  {
+    "model": "glm-5.2",
+    "route": "responses",
+    "stream": true,
+    "input_effort": null,
+    "status": 200,
+    "capture": {
+      "model": "glm-5.2",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "response.created",
+      "response.in_progress",
+      "response.output_item.added",
+      "response.reasoning_summary_part.added",
+      "response.reasoning_summary_text.delta",
+      "response.reasoning_summary_text.done",
+      "response.reasoning_summary_part.done",
+      "response.output_item.done",
+      "response.output_item.added",
+      "response.content_part.added",
+      "response.output_text.delta",
+      "response.output_text.done",
+      "response.content_part.done",
+      "response.output_item.done",
+      "response.completed"
+    ]
+  },
+  {
+    "model": "glm-5.2",
+    "route": "responses",
+    "stream": false,
+    "input_effort": "high",
+    "status": 200,
+    "capture": {
+      "model": "glm-5.2",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "glm-5.2",
+    "route": "responses",
+    "stream": false,
+    "input_effort": "xhigh",
+    "status": 200,
+    "capture": {
+      "model": "glm-5.2",
+      "reasoning_effort": "xhigh",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "glm-5.2",
+    "route": "responses",
+    "stream": false,
+    "input_effort": null,
+    "status": 200,
+    "capture": {
+      "model": "glm-5.2",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "glm-5.2",
+    "route": "chat/completions",
+    "stream": true,
+    "input_effort": "high",
+    "status": 200,
+    "capture": {
+      "model": "glm-5.2",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "",
+      "",
+      ""
+    ]
+  },
+  {
+    "model": "glm-5.2",
+    "route": "chat/completions",
+    "stream": true,
+    "input_effort": "xhigh",
+    "status": 200,
+    "capture": {
+      "model": "glm-5.2",
+      "reasoning_effort": "xhigh",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "",
+      "",
+      ""
+    ]
+  },
+  {
+    "model": "glm-5.2",
+    "route": "chat/completions",
+    "stream": true,
+    "input_effort": null,
+    "status": 200,
+    "capture": {
+      "model": "glm-5.2",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "",
+      "",
+      ""
+    ]
+  },
+  {
+    "model": "glm-5.2",
+    "route": "chat/completions",
+    "stream": false,
+    "input_effort": "high",
+    "status": 200,
+    "capture": {
+      "model": "glm-5.2",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "glm-5.2",
+    "route": "chat/completions",
+    "stream": false,
+    "input_effort": "xhigh",
+    "status": 200,
+    "capture": {
+      "model": "glm-5.2",
+      "reasoning_effort": "xhigh",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "glm-5.2",
+    "route": "chat/completions",
+    "stream": false,
+    "input_effort": null,
+    "status": 200,
+    "capture": {
+      "model": "glm-5.2",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "deepseek-v4-flash",
+    "route": "responses",
+    "stream": true,
+    "input_effort": "high",
+    "status": 200,
+    "capture": {
+      "model": "deepseek-v4-flash",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "response.created",
+      "response.in_progress",
+      "response.output_item.added",
+      "response.reasoning_summary_part.added",
+      "response.reasoning_summary_text.delta",
+      "response.reasoning_summary_text.done",
+      "response.reasoning_summary_part.done",
+      "response.output_item.done",
+      "response.output_item.added",
+      "response.content_part.added",
+      "response.output_text.delta",
+      "response.output_text.done",
+      "response.content_part.done",
+      "response.output_item.done",
+      "response.completed"
+    ]
+  },
+  {
+    "model": "deepseek-v4-flash",
+    "route": "responses",
+    "stream": true,
+    "input_effort": "xhigh",
+    "status": 200,
+    "capture": {
+      "model": "deepseek-v4-flash",
+      "reasoning_effort": "xhigh",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "response.created",
+      "response.in_progress",
+      "response.output_item.added",
+      "response.reasoning_summary_part.added",
+      "response.reasoning_summary_text.delta",
+      "response.reasoning_summary_text.done",
+      "response.reasoning_summary_part.done",
+      "response.output_item.done",
+      "response.output_item.added",
+      "response.content_part.added",
+      "response.output_text.delta",
+      "response.output_text.done",
+      "response.content_part.done",
+      "response.output_item.done",
+      "response.completed"
+    ]
+  },
+  {
+    "model": "deepseek-v4-flash",
+    "route": "responses",
+    "stream": true,
+    "input_effort": null,
+    "status": 200,
+    "capture": {
+      "model": "deepseek-v4-flash",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "response.created",
+      "response.in_progress",
+      "response.output_item.added",
+      "response.reasoning_summary_part.added",
+      "response.reasoning_summary_text.delta",
+      "response.reasoning_summary_text.done",
+      "response.reasoning_summary_part.done",
+      "response.output_item.done",
+      "response.output_item.added",
+      "response.content_part.added",
+      "response.output_text.delta",
+      "response.output_text.done",
+      "response.content_part.done",
+      "response.output_item.done",
+      "response.completed"
+    ]
+  },
+  {
+    "model": "deepseek-v4-flash",
+    "route": "responses",
+    "stream": false,
+    "input_effort": "high",
+    "status": 200,
+    "capture": {
+      "model": "deepseek-v4-flash",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "deepseek-v4-flash",
+    "route": "responses",
+    "stream": false,
+    "input_effort": "xhigh",
+    "status": 200,
+    "capture": {
+      "model": "deepseek-v4-flash",
+      "reasoning_effort": "xhigh",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "deepseek-v4-flash",
+    "route": "responses",
+    "stream": false,
+    "input_effort": null,
+    "status": 200,
+    "capture": {
+      "model": "deepseek-v4-flash",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "deepseek-v4-flash",
+    "route": "chat/completions",
+    "stream": true,
+    "input_effort": "high",
+    "status": 200,
+    "capture": {
+      "model": "deepseek-v4-flash",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "",
+      "",
+      ""
+    ]
+  },
+  {
+    "model": "deepseek-v4-flash",
+    "route": "chat/completions",
+    "stream": true,
+    "input_effort": "xhigh",
+    "status": 200,
+    "capture": {
+      "model": "deepseek-v4-flash",
+      "reasoning_effort": "xhigh",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "",
+      "",
+      ""
+    ]
+  },
+  {
+    "model": "deepseek-v4-flash",
+    "route": "chat/completions",
+    "stream": true,
+    "input_effort": null,
+    "status": 200,
+    "capture": {
+      "model": "deepseek-v4-flash",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "",
+      "",
+      ""
+    ]
+  },
+  {
+    "model": "deepseek-v4-flash",
+    "route": "chat/completions",
+    "stream": false,
+    "input_effort": "high",
+    "status": 200,
+    "capture": {
+      "model": "deepseek-v4-flash",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "deepseek-v4-flash",
+    "route": "chat/completions",
+    "stream": false,
+    "input_effort": "xhigh",
+    "status": 200,
+    "capture": {
+      "model": "deepseek-v4-flash",
+      "reasoning_effort": "xhigh",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "deepseek-v4-flash",
+    "route": "chat/completions",
+    "stream": false,
+    "input_effort": null,
+    "status": 200,
+    "capture": {
+      "model": "deepseek-v4-flash",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "deepseek-v4-pro",
+    "route": "responses",
+    "stream": true,
+    "input_effort": "high",
+    "status": 200,
+    "capture": {
+      "model": "deepseek-v4-pro",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "response.created",
+      "response.in_progress",
+      "response.output_item.added",
+      "response.reasoning_summary_part.added",
+      "response.reasoning_summary_text.delta",
+      "response.reasoning_summary_text.done",
+      "response.reasoning_summary_part.done",
+      "response.output_item.done",
+      "response.output_item.added",
+      "response.content_part.added",
+      "response.output_text.delta",
+      "response.output_text.done",
+      "response.content_part.done",
+      "response.output_item.done",
+      "response.completed"
+    ]
+  },
+  {
+    "model": "deepseek-v4-pro",
+    "route": "responses",
+    "stream": true,
+    "input_effort": "xhigh",
+    "status": 200,
+    "capture": {
+      "model": "deepseek-v4-pro",
+      "reasoning_effort": "xhigh",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "response.created",
+      "response.in_progress",
+      "response.output_item.added",
+      "response.reasoning_summary_part.added",
+      "response.reasoning_summary_text.delta",
+      "response.reasoning_summary_text.done",
+      "response.reasoning_summary_part.done",
+      "response.output_item.done",
+      "response.output_item.added",
+      "response.content_part.added",
+      "response.output_text.delta",
+      "response.output_text.done",
+      "response.content_part.done",
+      "response.output_item.done",
+      "response.completed"
+    ]
+  },
+  {
+    "model": "deepseek-v4-pro",
+    "route": "responses",
+    "stream": true,
+    "input_effort": null,
+    "status": 200,
+    "capture": {
+      "model": "deepseek-v4-pro",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "response.created",
+      "response.in_progress",
+      "response.output_item.added",
+      "response.reasoning_summary_part.added",
+      "response.reasoning_summary_text.delta",
+      "response.reasoning_summary_text.done",
+      "response.reasoning_summary_part.done",
+      "response.output_item.done",
+      "response.output_item.added",
+      "response.content_part.added",
+      "response.output_text.delta",
+      "response.output_text.done",
+      "response.content_part.done",
+      "response.output_item.done",
+      "response.completed"
+    ]
+  },
+  {
+    "model": "deepseek-v4-pro",
+    "route": "responses",
+    "stream": false,
+    "input_effort": "high",
+    "status": 200,
+    "capture": {
+      "model": "deepseek-v4-pro",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "deepseek-v4-pro",
+    "route": "responses",
+    "stream": false,
+    "input_effort": "xhigh",
+    "status": 200,
+    "capture": {
+      "model": "deepseek-v4-pro",
+      "reasoning_effort": "xhigh",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "deepseek-v4-pro",
+    "route": "responses",
+    "stream": false,
+    "input_effort": null,
+    "status": 200,
+    "capture": {
+      "model": "deepseek-v4-pro",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "deepseek-v4-pro",
+    "route": "chat/completions",
+    "stream": true,
+    "input_effort": "high",
+    "status": 200,
+    "capture": {
+      "model": "deepseek-v4-pro",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "",
+      "",
+      ""
+    ]
+  },
+  {
+    "model": "deepseek-v4-pro",
+    "route": "chat/completions",
+    "stream": true,
+    "input_effort": "xhigh",
+    "status": 200,
+    "capture": {
+      "model": "deepseek-v4-pro",
+      "reasoning_effort": "xhigh",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "",
+      "",
+      ""
+    ]
+  },
+  {
+    "model": "deepseek-v4-pro",
+    "route": "chat/completions",
+    "stream": true,
+    "input_effort": null,
+    "status": 200,
+    "capture": {
+      "model": "deepseek-v4-pro",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "",
+      "",
+      ""
+    ]
+  },
+  {
+    "model": "deepseek-v4-pro",
+    "route": "chat/completions",
+    "stream": false,
+    "input_effort": "high",
+    "status": 200,
+    "capture": {
+      "model": "deepseek-v4-pro",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "deepseek-v4-pro",
+    "route": "chat/completions",
+    "stream": false,
+    "input_effort": "xhigh",
+    "status": 200,
+    "capture": {
+      "model": "deepseek-v4-pro",
+      "reasoning_effort": "xhigh",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "deepseek-v4-pro",
+    "route": "chat/completions",
+    "stream": false,
+    "input_effort": null,
+    "status": 200,
+    "capture": {
+      "model": "deepseek-v4-pro",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "hy3",
+    "route": "responses",
+    "stream": true,
+    "input_effort": "low",
+    "status": 200,
+    "capture": {
+      "model": "hy3",
+      "reasoning_effort": "low",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "response.created",
+      "response.in_progress",
+      "response.output_item.added",
+      "response.reasoning_summary_part.added",
+      "response.reasoning_summary_text.delta",
+      "response.reasoning_summary_text.done",
+      "response.reasoning_summary_part.done",
+      "response.output_item.done",
+      "response.output_item.added",
+      "response.content_part.added",
+      "response.output_text.delta",
+      "response.output_text.done",
+      "response.content_part.done",
+      "response.output_item.done",
+      "response.completed"
+    ]
+  },
+  {
+    "model": "hy3",
+    "route": "responses",
+    "stream": true,
+    "input_effort": "high",
+    "status": 200,
+    "capture": {
+      "model": "hy3",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "response.created",
+      "response.in_progress",
+      "response.output_item.added",
+      "response.reasoning_summary_part.added",
+      "response.reasoning_summary_text.delta",
+      "response.reasoning_summary_text.done",
+      "response.reasoning_summary_part.done",
+      "response.output_item.done",
+      "response.output_item.added",
+      "response.content_part.added",
+      "response.output_text.delta",
+      "response.output_text.done",
+      "response.content_part.done",
+      "response.output_item.done",
+      "response.completed"
+    ]
+  },
+  {
+    "model": "hy3",
+    "route": "responses",
+    "stream": true,
+    "input_effort": null,
+    "status": 200,
+    "capture": {
+      "model": "hy3",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "response.created",
+      "response.in_progress",
+      "response.output_item.added",
+      "response.reasoning_summary_part.added",
+      "response.reasoning_summary_text.delta",
+      "response.reasoning_summary_text.done",
+      "response.reasoning_summary_part.done",
+      "response.output_item.done",
+      "response.output_item.added",
+      "response.content_part.added",
+      "response.output_text.delta",
+      "response.output_text.done",
+      "response.content_part.done",
+      "response.output_item.done",
+      "response.completed"
+    ]
+  },
+  {
+    "model": "hy3",
+    "route": "responses",
+    "stream": false,
+    "input_effort": "low",
+    "status": 200,
+    "capture": {
+      "model": "hy3",
+      "reasoning_effort": "low",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "hy3",
+    "route": "responses",
+    "stream": false,
+    "input_effort": "high",
+    "status": 200,
+    "capture": {
+      "model": "hy3",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "hy3",
+    "route": "responses",
+    "stream": false,
+    "input_effort": null,
+    "status": 200,
+    "capture": {
+      "model": "hy3",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "hy3",
+    "route": "chat/completions",
+    "stream": true,
+    "input_effort": "low",
+    "status": 200,
+    "capture": {
+      "model": "hy3",
+      "reasoning_effort": "low",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "",
+      "",
+      ""
+    ]
+  },
+  {
+    "model": "hy3",
+    "route": "chat/completions",
+    "stream": true,
+    "input_effort": "high",
+    "status": 200,
+    "capture": {
+      "model": "hy3",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "",
+      "",
+      ""
+    ]
+  },
+  {
+    "model": "hy3",
+    "route": "chat/completions",
+    "stream": true,
+    "input_effort": null,
+    "status": 200,
+    "capture": {
+      "model": "hy3",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "",
+      "",
+      ""
+    ]
+  },
+  {
+    "model": "hy3",
+    "route": "chat/completions",
+    "stream": false,
+    "input_effort": "low",
+    "status": 200,
+    "capture": {
+      "model": "hy3",
+      "reasoning_effort": "low",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "hy3",
+    "route": "chat/completions",
+    "stream": false,
+    "input_effort": "high",
+    "status": 200,
+    "capture": {
+      "model": "hy3",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "hy3",
+    "route": "chat/completions",
+    "stream": false,
+    "input_effort": null,
+    "status": 200,
+    "capture": {
+      "model": "hy3",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "hy3-preview",
+    "route": "responses",
+    "stream": true,
+    "input_effort": "low",
+    "status": 200,
+    "capture": {
+      "model": "hy3-preview",
+      "reasoning_effort": "low",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "response.created",
+      "response.in_progress",
+      "response.output_item.added",
+      "response.reasoning_summary_part.added",
+      "response.reasoning_summary_text.delta",
+      "response.reasoning_summary_text.done",
+      "response.reasoning_summary_part.done",
+      "response.output_item.done",
+      "response.output_item.added",
+      "response.content_part.added",
+      "response.output_text.delta",
+      "response.output_text.done",
+      "response.content_part.done",
+      "response.output_item.done",
+      "response.completed"
+    ]
+  },
+  {
+    "model": "hy3-preview",
+    "route": "responses",
+    "stream": true,
+    "input_effort": "high",
+    "status": 200,
+    "capture": {
+      "model": "hy3-preview",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "response.created",
+      "response.in_progress",
+      "response.output_item.added",
+      "response.reasoning_summary_part.added",
+      "response.reasoning_summary_text.delta",
+      "response.reasoning_summary_text.done",
+      "response.reasoning_summary_part.done",
+      "response.output_item.done",
+      "response.output_item.added",
+      "response.content_part.added",
+      "response.output_text.delta",
+      "response.output_text.done",
+      "response.content_part.done",
+      "response.output_item.done",
+      "response.completed"
+    ]
+  },
+  {
+    "model": "hy3-preview",
+    "route": "responses",
+    "stream": true,
+    "input_effort": null,
+    "status": 200,
+    "capture": {
+      "model": "hy3-preview",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "response.created",
+      "response.in_progress",
+      "response.output_item.added",
+      "response.reasoning_summary_part.added",
+      "response.reasoning_summary_text.delta",
+      "response.reasoning_summary_text.done",
+      "response.reasoning_summary_part.done",
+      "response.output_item.done",
+      "response.output_item.added",
+      "response.content_part.added",
+      "response.output_text.delta",
+      "response.output_text.done",
+      "response.content_part.done",
+      "response.output_item.done",
+      "response.completed"
+    ]
+  },
+  {
+    "model": "hy3-preview",
+    "route": "responses",
+    "stream": false,
+    "input_effort": "low",
+    "status": 200,
+    "capture": {
+      "model": "hy3-preview",
+      "reasoning_effort": "low",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "hy3-preview",
+    "route": "responses",
+    "stream": false,
+    "input_effort": "high",
+    "status": 200,
+    "capture": {
+      "model": "hy3-preview",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "hy3-preview",
+    "route": "responses",
+    "stream": false,
+    "input_effort": null,
+    "status": 200,
+    "capture": {
+      "model": "hy3-preview",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "hy3-preview",
+    "route": "chat/completions",
+    "stream": true,
+    "input_effort": "low",
+    "status": 200,
+    "capture": {
+      "model": "hy3-preview",
+      "reasoning_effort": "low",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "",
+      "",
+      ""
+    ]
+  },
+  {
+    "model": "hy3-preview",
+    "route": "chat/completions",
+    "stream": true,
+    "input_effort": "high",
+    "status": 200,
+    "capture": {
+      "model": "hy3-preview",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "",
+      "",
+      ""
+    ]
+  },
+  {
+    "model": "hy3-preview",
+    "route": "chat/completions",
+    "stream": true,
+    "input_effort": null,
+    "status": 200,
+    "capture": {
+      "model": "hy3-preview",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "",
+      "",
+      ""
+    ]
+  },
+  {
+    "model": "hy3-preview",
+    "route": "chat/completions",
+    "stream": false,
+    "input_effort": "low",
+    "status": 200,
+    "capture": {
+      "model": "hy3-preview",
+      "reasoning_effort": "low",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "hy3-preview",
+    "route": "chat/completions",
+    "stream": false,
+    "input_effort": "high",
+    "status": 200,
+    "capture": {
+      "model": "hy3-preview",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "hy3-preview",
+    "route": "chat/completions",
+    "stream": false,
+    "input_effort": null,
+    "status": 200,
+    "capture": {
+      "model": "hy3-preview",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "hy3-preview-agent",
+    "route": "responses",
+    "stream": true,
+    "input_effort": "low",
+    "status": 200,
+    "capture": {
+      "model": "hy3-preview-agent",
+      "reasoning_effort": "low",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "response.created",
+      "response.in_progress",
+      "response.output_item.added",
+      "response.reasoning_summary_part.added",
+      "response.reasoning_summary_text.delta",
+      "response.reasoning_summary_text.done",
+      "response.reasoning_summary_part.done",
+      "response.output_item.done",
+      "response.output_item.added",
+      "response.content_part.added",
+      "response.output_text.delta",
+      "response.output_text.done",
+      "response.content_part.done",
+      "response.output_item.done",
+      "response.completed"
+    ]
+  },
+  {
+    "model": "hy3-preview-agent",
+    "route": "responses",
+    "stream": true,
+    "input_effort": "high",
+    "status": 200,
+    "capture": {
+      "model": "hy3-preview-agent",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "response.created",
+      "response.in_progress",
+      "response.output_item.added",
+      "response.reasoning_summary_part.added",
+      "response.reasoning_summary_text.delta",
+      "response.reasoning_summary_text.done",
+      "response.reasoning_summary_part.done",
+      "response.output_item.done",
+      "response.output_item.added",
+      "response.content_part.added",
+      "response.output_text.delta",
+      "response.output_text.done",
+      "response.content_part.done",
+      "response.output_item.done",
+      "response.completed"
+    ]
+  },
+  {
+    "model": "hy3-preview-agent",
+    "route": "responses",
+    "stream": true,
+    "input_effort": null,
+    "status": 200,
+    "capture": {
+      "model": "hy3-preview-agent",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "response.created",
+      "response.in_progress",
+      "response.output_item.added",
+      "response.reasoning_summary_part.added",
+      "response.reasoning_summary_text.delta",
+      "response.reasoning_summary_text.done",
+      "response.reasoning_summary_part.done",
+      "response.output_item.done",
+      "response.output_item.added",
+      "response.content_part.added",
+      "response.output_text.delta",
+      "response.output_text.done",
+      "response.content_part.done",
+      "response.output_item.done",
+      "response.completed"
+    ]
+  },
+  {
+    "model": "hy3-preview-agent",
+    "route": "responses",
+    "stream": false,
+    "input_effort": "low",
+    "status": 200,
+    "capture": {
+      "model": "hy3-preview-agent",
+      "reasoning_effort": "low",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "hy3-preview-agent",
+    "route": "responses",
+    "stream": false,
+    "input_effort": "high",
+    "status": 200,
+    "capture": {
+      "model": "hy3-preview-agent",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "hy3-preview-agent",
+    "route": "responses",
+    "stream": false,
+    "input_effort": null,
+    "status": 200,
+    "capture": {
+      "model": "hy3-preview-agent",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "hy3-preview-agent",
+    "route": "chat/completions",
+    "stream": true,
+    "input_effort": "low",
+    "status": 200,
+    "capture": {
+      "model": "hy3-preview-agent",
+      "reasoning_effort": "low",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "",
+      "",
+      ""
+    ]
+  },
+  {
+    "model": "hy3-preview-agent",
+    "route": "chat/completions",
+    "stream": true,
+    "input_effort": "high",
+    "status": 200,
+    "capture": {
+      "model": "hy3-preview-agent",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "",
+      "",
+      ""
+    ]
+  },
+  {
+    "model": "hy3-preview-agent",
+    "route": "chat/completions",
+    "stream": true,
+    "input_effort": null,
+    "status": 200,
+    "capture": {
+      "model": "hy3-preview-agent",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "",
+      "",
+      ""
+    ]
+  },
+  {
+    "model": "hy3-preview-agent",
+    "route": "chat/completions",
+    "stream": false,
+    "input_effort": "low",
+    "status": 200,
+    "capture": {
+      "model": "hy3-preview-agent",
+      "reasoning_effort": "low",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "hy3-preview-agent",
+    "route": "chat/completions",
+    "stream": false,
+    "input_effort": "high",
+    "status": 200,
+    "capture": {
+      "model": "hy3-preview-agent",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "hy3-preview-agent",
+    "route": "chat/completions",
+    "stream": false,
+    "input_effort": null,
+    "status": 200,
+    "capture": {
+      "model": "hy3-preview-agent",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "hy4-preview",
+    "route": "responses",
+    "stream": true,
+    "input_effort": "high",
+    "status": 200,
+    "capture": {
+      "model": "hy4-preview",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "response.created",
+      "response.in_progress",
+      "response.output_item.added",
+      "response.reasoning_summary_part.added",
+      "response.reasoning_summary_text.delta",
+      "response.reasoning_summary_text.done",
+      "response.reasoning_summary_part.done",
+      "response.output_item.done",
+      "response.output_item.added",
+      "response.content_part.added",
+      "response.output_text.delta",
+      "response.output_text.done",
+      "response.content_part.done",
+      "response.output_item.done",
+      "response.completed"
+    ]
+  },
+  {
+    "model": "hy4-preview",
+    "route": "responses",
+    "stream": true,
+    "input_effort": null,
+    "status": 200,
+    "capture": {
+      "model": "hy4-preview",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "response.created",
+      "response.in_progress",
+      "response.output_item.added",
+      "response.reasoning_summary_part.added",
+      "response.reasoning_summary_text.delta",
+      "response.reasoning_summary_text.done",
+      "response.reasoning_summary_part.done",
+      "response.output_item.done",
+      "response.output_item.added",
+      "response.content_part.added",
+      "response.output_text.delta",
+      "response.output_text.done",
+      "response.content_part.done",
+      "response.output_item.done",
+      "response.completed"
+    ]
+  },
+  {
+    "model": "hy4-preview",
+    "route": "responses",
+    "stream": false,
+    "input_effort": "high",
+    "status": 200,
+    "capture": {
+      "model": "hy4-preview",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "hy4-preview",
+    "route": "responses",
+    "stream": false,
+    "input_effort": null,
+    "status": 200,
+    "capture": {
+      "model": "hy4-preview",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "hy4-preview",
+    "route": "chat/completions",
+    "stream": true,
+    "input_effort": "high",
+    "status": 200,
+    "capture": {
+      "model": "hy4-preview",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "",
+      "",
+      ""
+    ]
+  },
+  {
+    "model": "hy4-preview",
+    "route": "chat/completions",
+    "stream": true,
+    "input_effort": null,
+    "status": 200,
+    "capture": {
+      "model": "hy4-preview",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "",
+      "",
+      ""
+    ]
+  },
+  {
+    "model": "hy4-preview",
+    "route": "chat/completions",
+    "stream": false,
+    "input_effort": "high",
+    "status": 200,
+    "capture": {
+      "model": "hy4-preview",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "hy4-preview",
+    "route": "chat/completions",
+    "stream": false,
+    "input_effort": null,
+    "status": 200,
+    "capture": {
+      "model": "hy4-preview",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "hy4",
+    "route": "responses",
+    "stream": true,
+    "input_effort": "high",
+    "status": 200,
+    "capture": {
+      "model": "hy4",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "response.created",
+      "response.in_progress",
+      "response.output_item.added",
+      "response.reasoning_summary_part.added",
+      "response.reasoning_summary_text.delta",
+      "response.reasoning_summary_text.done",
+      "response.reasoning_summary_part.done",
+      "response.output_item.done",
+      "response.output_item.added",
+      "response.content_part.added",
+      "response.output_text.delta",
+      "response.output_text.done",
+      "response.content_part.done",
+      "response.output_item.done",
+      "response.completed"
+    ]
+  },
+  {
+    "model": "hy4",
+    "route": "responses",
+    "stream": true,
+    "input_effort": null,
+    "status": 200,
+    "capture": {
+      "model": "hy4",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "response.created",
+      "response.in_progress",
+      "response.output_item.added",
+      "response.reasoning_summary_part.added",
+      "response.reasoning_summary_text.delta",
+      "response.reasoning_summary_text.done",
+      "response.reasoning_summary_part.done",
+      "response.output_item.done",
+      "response.output_item.added",
+      "response.content_part.added",
+      "response.output_text.delta",
+      "response.output_text.done",
+      "response.content_part.done",
+      "response.output_item.done",
+      "response.completed"
+    ]
+  },
+  {
+    "model": "hy4",
+    "route": "responses",
+    "stream": false,
+    "input_effort": "high",
+    "status": 200,
+    "capture": {
+      "model": "hy4",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "hy4",
+    "route": "responses",
+    "stream": false,
+    "input_effort": null,
+    "status": 200,
+    "capture": {
+      "model": "hy4",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "hy4",
+    "route": "chat/completions",
+    "stream": true,
+    "input_effort": "high",
+    "status": 200,
+    "capture": {
+      "model": "hy4",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "",
+      "",
+      ""
+    ]
+  },
+  {
+    "model": "hy4",
+    "route": "chat/completions",
+    "stream": true,
+    "input_effort": null,
+    "status": 200,
+    "capture": {
+      "model": "hy4",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "",
+      "",
+      ""
+    ]
+  },
+  {
+    "model": "hy4",
+    "route": "chat/completions",
+    "stream": false,
+    "input_effort": "high",
+    "status": 200,
+    "capture": {
+      "model": "hy4",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "hy4",
+    "route": "chat/completions",
+    "stream": false,
+    "input_effort": null,
+    "status": 200,
+    "capture": {
+      "model": "hy4",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "mimo-v2.6-pro",
+    "route": "responses",
+    "stream": true,
+    "input_effort": "high",
+    "status": 200,
+    "capture": {
+      "model": "mimo-v2.6-pro",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "response.created",
+      "response.in_progress",
+      "response.output_item.added",
+      "response.reasoning_summary_part.added",
+      "response.reasoning_summary_text.delta",
+      "response.reasoning_summary_text.done",
+      "response.reasoning_summary_part.done",
+      "response.output_item.done",
+      "response.output_item.added",
+      "response.content_part.added",
+      "response.output_text.delta",
+      "response.output_text.done",
+      "response.content_part.done",
+      "response.output_item.done",
+      "response.completed"
+    ]
+  },
+  {
+    "model": "mimo-v2.6-pro",
+    "route": "responses",
+    "stream": true,
+    "input_effort": null,
+    "status": 200,
+    "capture": {
+      "model": "mimo-v2.6-pro",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "response.created",
+      "response.in_progress",
+      "response.output_item.added",
+      "response.reasoning_summary_part.added",
+      "response.reasoning_summary_text.delta",
+      "response.reasoning_summary_text.done",
+      "response.reasoning_summary_part.done",
+      "response.output_item.done",
+      "response.output_item.added",
+      "response.content_part.added",
+      "response.output_text.delta",
+      "response.output_text.done",
+      "response.content_part.done",
+      "response.output_item.done",
+      "response.completed"
+    ]
+  },
+  {
+    "model": "mimo-v2.6-pro",
+    "route": "responses",
+    "stream": false,
+    "input_effort": "high",
+    "status": 200,
+    "capture": {
+      "model": "mimo-v2.6-pro",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "mimo-v2.6-pro",
+    "route": "responses",
+    "stream": false,
+    "input_effort": null,
+    "status": 200,
+    "capture": {
+      "model": "mimo-v2.6-pro",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "mimo-v2.6-pro",
+    "route": "chat/completions",
+    "stream": true,
+    "input_effort": "high",
+    "status": 200,
+    "capture": {
+      "model": "mimo-v2.6-pro",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "",
+      "",
+      ""
+    ]
+  },
+  {
+    "model": "mimo-v2.6-pro",
+    "route": "chat/completions",
+    "stream": true,
+    "input_effort": null,
+    "status": 200,
+    "capture": {
+      "model": "mimo-v2.6-pro",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "",
+      "",
+      ""
+    ]
+  },
+  {
+    "model": "mimo-v2.6-pro",
+    "route": "chat/completions",
+    "stream": false,
+    "input_effort": "high",
+    "status": 200,
+    "capture": {
+      "model": "mimo-v2.6-pro",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "mimo-v2.6-pro",
+    "route": "chat/completions",
+    "stream": false,
+    "input_effort": null,
+    "status": 200,
+    "capture": {
+      "model": "mimo-v2.6-pro",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "opaque-channel-id",
+    "route": "responses",
+    "stream": true,
+    "input_effort": "low",
+    "status": 200,
+    "capture": {
+      "model": "opaque-channel-id",
+      "reasoning_effort": "low",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "response.created",
+      "response.in_progress",
+      "response.output_item.added",
+      "response.reasoning_summary_part.added",
+      "response.reasoning_summary_text.delta",
+      "response.reasoning_summary_text.done",
+      "response.reasoning_summary_part.done",
+      "response.output_item.done",
+      "response.output_item.added",
+      "response.content_part.added",
+      "response.output_text.delta",
+      "response.output_text.done",
+      "response.content_part.done",
+      "response.output_item.done",
+      "response.completed"
+    ]
+  },
+  {
+    "model": "opaque-channel-id",
+    "route": "responses",
+    "stream": true,
+    "input_effort": "high",
+    "status": 200,
+    "capture": {
+      "model": "opaque-channel-id",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "response.created",
+      "response.in_progress",
+      "response.output_item.added",
+      "response.reasoning_summary_part.added",
+      "response.reasoning_summary_text.delta",
+      "response.reasoning_summary_text.done",
+      "response.reasoning_summary_part.done",
+      "response.output_item.done",
+      "response.output_item.added",
+      "response.content_part.added",
+      "response.output_text.delta",
+      "response.output_text.done",
+      "response.content_part.done",
+      "response.output_item.done",
+      "response.completed"
+    ]
+  },
+  {
+    "model": "opaque-channel-id",
+    "route": "responses",
+    "stream": true,
+    "input_effort": "max",
+    "status": 200,
+    "capture": {
+      "model": "opaque-channel-id",
+      "reasoning_effort": "max",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "response.created",
+      "response.in_progress",
+      "response.output_item.added",
+      "response.reasoning_summary_part.added",
+      "response.reasoning_summary_text.delta",
+      "response.reasoning_summary_text.done",
+      "response.reasoning_summary_part.done",
+      "response.output_item.done",
+      "response.output_item.added",
+      "response.content_part.added",
+      "response.output_text.delta",
+      "response.output_text.done",
+      "response.content_part.done",
+      "response.output_item.done",
+      "response.completed"
+    ]
+  },
+  {
+    "model": "opaque-channel-id",
+    "route": "responses",
+    "stream": true,
+    "input_effort": null,
+    "status": 200,
+    "capture": {
+      "model": "opaque-channel-id",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "response.created",
+      "response.in_progress",
+      "response.output_item.added",
+      "response.reasoning_summary_part.added",
+      "response.reasoning_summary_text.delta",
+      "response.reasoning_summary_text.done",
+      "response.reasoning_summary_part.done",
+      "response.output_item.done",
+      "response.output_item.added",
+      "response.content_part.added",
+      "response.output_text.delta",
+      "response.output_text.done",
+      "response.content_part.done",
+      "response.output_item.done",
+      "response.completed"
+    ]
+  },
+  {
+    "model": "opaque-channel-id",
+    "route": "responses",
+    "stream": false,
+    "input_effort": "low",
+    "status": 200,
+    "capture": {
+      "model": "opaque-channel-id",
+      "reasoning_effort": "low",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "opaque-channel-id",
+    "route": "responses",
+    "stream": false,
+    "input_effort": "high",
+    "status": 200,
+    "capture": {
+      "model": "opaque-channel-id",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "opaque-channel-id",
+    "route": "responses",
+    "stream": false,
+    "input_effort": "max",
+    "status": 200,
+    "capture": {
+      "model": "opaque-channel-id",
+      "reasoning_effort": "max",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "opaque-channel-id",
+    "route": "responses",
+    "stream": false,
+    "input_effort": null,
+    "status": 200,
+    "capture": {
+      "model": "opaque-channel-id",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "opaque-channel-id",
+    "route": "chat/completions",
+    "stream": true,
+    "input_effort": "low",
+    "status": 200,
+    "capture": {
+      "model": "opaque-channel-id",
+      "reasoning_effort": "low",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "",
+      "",
+      ""
+    ]
+  },
+  {
+    "model": "opaque-channel-id",
+    "route": "chat/completions",
+    "stream": true,
+    "input_effort": "high",
+    "status": 200,
+    "capture": {
+      "model": "opaque-channel-id",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "",
+      "",
+      ""
+    ]
+  },
+  {
+    "model": "opaque-channel-id",
+    "route": "chat/completions",
+    "stream": true,
+    "input_effort": "max",
+    "status": 200,
+    "capture": {
+      "model": "opaque-channel-id",
+      "reasoning_effort": "max",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "",
+      "",
+      ""
+    ]
+  },
+  {
+    "model": "opaque-channel-id",
+    "route": "chat/completions",
+    "stream": true,
+    "input_effort": null,
+    "status": 200,
+    "capture": {
+      "model": "opaque-channel-id",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "",
+      "",
+      ""
+    ]
+  },
+  {
+    "model": "opaque-channel-id",
+    "route": "chat/completions",
+    "stream": false,
+    "input_effort": "low",
+    "status": 200,
+    "capture": {
+      "model": "opaque-channel-id",
+      "reasoning_effort": "low",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "opaque-channel-id",
+    "route": "chat/completions",
+    "stream": false,
+    "input_effort": "high",
+    "status": 200,
+    "capture": {
+      "model": "opaque-channel-id",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "opaque-channel-id",
+    "route": "chat/completions",
+    "stream": false,
+    "input_effort": "max",
+    "status": 200,
+    "capture": {
+      "model": "opaque-channel-id",
+      "reasoning_effort": "max",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "opaque-channel-id",
+    "route": "chat/completions",
+    "stream": false,
+    "input_effort": null,
+    "status": 200,
+    "capture": {
+      "model": "opaque-channel-id",
+      "reasoning_effort": "high",
+      "reasoning_summary": "auto"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": []
+  },
+  {
+    "model": "deepseek-v4.1-flash",
+    "route": "responses",
+    "input_effort": "medium",
+    "status": 400,
+    "error": "{\"error\":{\"message\":\"level \\\"medium\\\" not supported, valid levels: low, high, max\",\"type\":\"invalid_request_error\"}}"
+  },
+  {
+    "model": "deepseek-v4.1-flash",
+    "route": "responses",
+    "input_effort": "xhigh",
+    "status": 400,
+    "error": "{\"error\":{\"message\":\"level \\\"xhigh\\\" not supported, valid levels: low, high, max\",\"type\":\"invalid_request_error\"}}"
+  },
+  {
+    "model": "deepseek-v4.1-flash",
+    "route": "responses",
+    "input_effort": "ultra",
+    "status": 400,
+    "error": "{\"error\":{\"message\":\"level \\\"ultra\\\" not supported, valid levels: low, high, max\",\"type\":\"invalid_request_error\"}}"
+  },
+  {
+    "model": "deepseek-v4.1-flash",
+    "route": "responses",
+    "input_summary": "none",
+    "status": 200,
+    "capture": {
+      "model": "deepseek-v4.1-flash",
+      "reasoning_effort": "high",
+      "reasoning_summary": "none"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "response.created",
+      "response.in_progress",
+      "response.output_item.added",
+      "response.reasoning_summary_part.added",
+      "response.reasoning_summary_text.delta",
+      "response.reasoning_summary_text.done",
+      "response.reasoning_summary_part.done",
+      "response.output_item.done",
+      "response.output_item.added",
+      "response.content_part.added",
+      "response.output_text.delta",
+      "response.output_text.done",
+      "response.content_part.done",
+      "response.output_item.done",
+      "response.completed"
+    ]
+  },
+  {
+    "model": "deepseek-v4.1-flash",
+    "route": "chat/completions",
+    "input_effort": "medium",
+    "status": 400,
+    "error": "{\"error\":{\"message\":\"level \\\"medium\\\" not supported, valid levels: low, high, max\",\"type\":\"invalid_request_error\"}}"
+  },
+  {
+    "model": "deepseek-v4.1-flash",
+    "route": "chat/completions",
+    "input_effort": "xhigh",
+    "status": 400,
+    "error": "{\"error\":{\"message\":\"level \\\"xhigh\\\" not supported, valid levels: low, high, max\",\"type\":\"invalid_request_error\"}}"
+  },
+  {
+    "model": "deepseek-v4.1-flash",
+    "route": "chat/completions",
+    "input_effort": "ultra",
+    "status": 400,
+    "error": "{\"error\":{\"message\":\"level \\\"ultra\\\" not supported, valid levels: low, high, max\",\"type\":\"invalid_request_error\"}}"
+  },
+  {
+    "model": "deepseek-v4.1-flash",
+    "route": "chat/completions",
+    "input_summary": "none",
+    "status": 200,
+    "capture": {
+      "model": "deepseek-v4.1-flash",
+      "reasoning_effort": "high",
+      "reasoning_summary": "none"
+    },
+    "reasoning": "synthetic-reasoning",
+    "events": [
+      "",
+      "",
+      ""
+    ]
+  }
+]

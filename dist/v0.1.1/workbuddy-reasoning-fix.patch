@@ -1,0 +1,1145 @@
+--- a/main.go
++++ b/main.go
+@@ -297,7 +297,7 @@
+ 		SchemaVersion: pluginabi.SchemaVersion,
+ 		Metadata: pluginapi.Metadata{
+ 			Name:             providerName,
+-			Version:          "0.1.0",
++			Version:          "0.1.1",
+ 			Author:           "lovingfish (clean-room rebuild; original workbuddy by Sliverkiss)",
+ 			GitHubRepository: "https://github.com/zhouyulong/workbuddy-cliproxy",
+ 		},
+@@ -344,6 +344,9 @@
+ 			UserDefined:                true,
+ 		})
+ 	}
++	for i := range models {
++		applyKnownModelProfile(&models[i])
++	}
+ 	return models
+ }
+
+@@ -686,7 +689,10 @@
+ 	}
+ 	// CodeBuddy rejects non-stream requests (code 11101), so always stream
+ 	// upstream and fold the chunks into a single chat.completion object.
+-	body := rewriteSystemForUpstream(forceStreamBody(req.Payload, req.OriginalRequest))
++	body, err := prepareReasoningForUpstream(rewriteSystemForUpstream(forceStreamBody(req.Payload, req.OriginalRequest)), req)
++	if err != nil {
++		return nil, err
++	}
+ 	httpReq, err := http.NewRequest(http.MethodPost, endpointChat, bytes.NewReader(body))
+ 	if err != nil {
+ 		return nil, err
+@@ -729,7 +735,10 @@
+ 	if len(body) == 0 {
+ 		body = req.OriginalRequest
+ 	}
+-	body = rewriteSystemForUpstream(body)
++	body, err = prepareReasoningForUpstream(rewriteSystemForUpstream(body), req.ExecutorRequest)
++	if err != nil {
++		return nil, err
++	}
+
+ 	headers := streamHeaders()
+ 	sseFramed := clientNeedsSSEFrame(req.Metadata)
+@@ -953,9 +962,6 @@
+ 			changed = true
+ 		}
+ 	}
+-	if forceMaxThinking(obj) {
+-		changed = true
+-	}
+ 	if !changed {
+ 		return payload
+ 	}
+@@ -1003,22 +1009,6 @@
+ 		"Main branch (you will usually use this for PRs)",
+ 		"Default branch (you will usually use this for PRs)")
+ 	return s
+-}
+-
+-// forceMaxThinking pins reasoning_effort to "high" for hy3-family models so
+-// Tencent Hunyuan 3 always reasons at maximum depth. CodeBuddy only honors
+-// "high" for deep thinking (medium/low/max/xhigh/ultra all fall back to no
+-// reasoning), so we override whatever the client sent. Returns true if changed.
+-func forceMaxThinking(obj map[string]any) bool {
+-	model, _ := obj["model"].(string)
+-	if !strings.HasPrefix(model, "hy3") {
+-		return false
+-	}
+-	if eff, _ := obj["reasoning_effort"].(string); eff == "high" {
+-		return false
+-	}
+-	obj["reasoning_effort"] = "high"
+-	return true
+ }
+
+ // aggregateCompletion folds an SSE stream into a single non-streaming
+--- a/models.go
++++ b/models.go
+@@ -34,7 +34,7 @@
+ 		// Some hosts request models before credential storage is available.
+ 		return okEnvelope(pluginapi.ModelResponse{Provider: providerName, Models: wbModels()})
+ 	}
+-	key := sha256.Sum256(req.StorageJSON)
++	key := modelCacheKey(req.StorageJSON)
+ 	fallback := wbModels()
+ 	if cached, ok := discoveredModels.Load(key); ok {
+ 		fallback = cached.([]pluginapi.ModelInfo)
+@@ -56,19 +56,38 @@
+ 	return okEnvelope(pluginapi.ModelResponse{Provider: providerName, Models: models})
+ }
+
++// Host model discovery and execution can serialize the same credentials with
++// different key order or host-only fields. Hash the provider-owned shape so
++// those equivalent representations share a cache without crossing accounts.
++func modelCacheKey(storage []byte) [32]byte {
++	if sa, err := parseStored(storage); err == nil {
++		canonical, _ := json.Marshal(sa)
++		return sha256.Sum256(canonical)
++	}
++	return sha256.Sum256(storage)
++}
++
++type upstreamReasoning struct {
++	SupportedEfforts   []string `json:"supportedEfforts"`
++	CanDisableThinking bool     `json:"canDisableThinking"`
++}
++
+ type upstreamModel struct {
+-	ID                  string   `json:"id"`
+-	Name                string   `json:"name"`
+-	OwnedBy             string   `json:"owned_by"`
+-	Created             int64    `json:"created"`
+-	Description         string   `json:"description"`
+-	ContextLength       int64    `json:"context_length"`
+-	MaxCompletionTokens int64    `json:"max_completion_tokens"`
+-	MaxInputTokens      int64    `json:"maxInputTokens"`
+-	MaxOutputTokens     int64    `json:"maxOutputTokens"`
+-	SupportsImages      bool     `json:"supportsImages"`
+-	Tags                []string `json:"tags"`
+-	Disabled            bool     `json:"disabled"`
++	ID                  string            `json:"id"`
++	Name                string            `json:"name"`
++	OwnedBy             string            `json:"owned_by"`
++	Created             int64             `json:"created"`
++	Description         string            `json:"description"`
++	ContextLength       int64             `json:"context_length"`
++	MaxCompletionTokens int64             `json:"max_completion_tokens"`
++	MaxInputTokens      int64             `json:"maxInputTokens"`
++	MaxOutputTokens     int64             `json:"maxOutputTokens"`
++	SupportsImages      bool              `json:"supportsImages"`
++	Tags                []string          `json:"tags"`
++	Disabled            bool              `json:"disabled"`
++	SupportsReasoning   *bool             `json:"supportsReasoning"`
++	OnlyReasoning       bool              `json:"onlyReasoning"`
++	Reasoning           upstreamReasoning `json:"reasoning"`
+ }
+
+ type upstreamModelPage struct {
+@@ -146,6 +165,8 @@
+ 			if item.SupportsImages {
+ 				m.SupportedInputModalities = []string{"text", "image"}
+ 			}
++			item.applyReasoningMetadata(&m)
++			applyKnownModelProfile(&m)
+ 			models = append(models, m)
+ 		}
+ 		if !page.HasMore {
+@@ -235,3 +256,34 @@
+ 	}
+ 	return true
+ }
++
++// Explicit capability metadata is authoritative for new models. When it is
++// absent/incomplete, CPA's UserDefined compatibility path preserves the request
++// rather than falsely asserting that the model cannot reason. No level list or
++// default effort is invented for an unknown model.
++func (m upstreamModel) applyReasoningMetadata(out *pluginapi.ModelInfo) {
++	out.Thinking = nil
++	out.UserDefined = true
++	if m.SupportsReasoning != nil && !*m.SupportsReasoning && !m.OnlyReasoning {
++		out.UserDefined = false
++		params := make([]string, 0, len(out.SupportedParameters))
++		for _, param := range out.SupportedParameters {
++			if param != "reasoning_effort" {
++				params = append(params, param)
++			}
++		}
++		out.SupportedParameters = params
++		return
++	}
++	levels := make([]string, 0)
++	for _, level := range []string{"low", "medium", "high", "xhigh", "max"} {
++		if hasEffort(m.Reasoning.SupportedEfforts, level) {
++			levels = append(levels, level)
++		}
++	}
++	if len(levels) > 0 {
++		out.Thinking = &pluginapi.ThinkingSupport{Levels: levels, ZeroAllowed: m.Reasoning.CanDisableThinking && !m.OnlyReasoning}
++		out.SupportedParameters = append(out.SupportedParameters, "reasoning_effort")
++		out.UserDefined = false
++	}
++}
+--- a/models_test.go
++++ b/models_test.go
+@@ -103,7 +103,7 @@
+ 		t.Fatal("lost known model metadata")
+ 	}
+ 	m := models[1]
+-	if m.Name != "new/model" || m.DisplayName != "New Model" || m.ContextLength != 123456 || m.MaxCompletionTokens != 16000 || m.OwnedBy != "upstream" || m.Created != 123 || m.UserDefined {
++	if m.Name != "new/model" || m.DisplayName != "New Model" || m.ContextLength != 123456 || m.MaxCompletionTokens != 16000 || m.OwnedBy != "upstream" || m.Created != 123 || !m.UserDefined {
+ 		t.Fatalf("lost upstream metadata: %#v", m)
+ 	}
+ }
+--- a/README.md
++++ b/README.md
+@@ -16,7 +16,7 @@
+
+ ## 安装
+
+-**前置**:运行中的 CLIProxyAPI v7.2.x(带 CGO / 插件支持)、CodeBuddy 账号、Go 1.26+ 与 gcc;编译架构需与 CPA 实例一致(amd64 / arm64)。
++**前置**:带 CGO / 动态插件支持的 CLIProxyAPI、CodeBuddy 账号、Go 1.26+ 与 C 编译器；编译架构需与 CPA 实例一致(amd64 / arm64)。插件仍基于 v7.2.30 SDK，另以本机 CPA 核心 v8.0.48 完成隔离 ABI/转发测试；没有升级或替换宿主。
+
+ ```bash
+ git clone https://github.com/zhouyulong/workbuddy-cliproxy.git
+@@ -76,7 +76,47 @@
+
+ ## 思考模式
+
+-hy3 系列(`hy3` / `hy3-preview` / `hy3-preview-agent`)自动开最大思考:workbuddy 转发前强制 `reasoning_effort=high`,覆盖客户端任何设置。CodeBuddy 只对 `high` 真正开深度思考(`medium` / `max` / `xhigh` 等档位它直接忽略),所以这已是 hy3 能用的最高档。思考内容走 SSE 的 `delta.reasoning_content`,客户端要支持渲染思考块才看得到。
++插件向 CPA 同时声明模型的 `Thinking.Levels` 与 `reasoning_effort` 支持，避免已发现模型因缺少能力声明而被宿主删除推理参数。静态兜底列表中的已知模型也使用同一份能力声明。账号的模型发现、分页、超时与失败兜底逻辑仍然保留。
++
++已知模型以本渠道 2026-11-09 的能力表为准（不是各模型厂商直连 API 的通用规则）：
++
++| 模型 | 可用 `reasoning_effort` | 未指定时 |
++|---|---|---|
++| Space-Bunny、MiniMax-M3.1-Flash | `low / medium / high / xhigh / max` | `max` |
++| Step-5-Preview | `low / medium / high` | `high` |
++| Kimi-K3 | `low / high / xhigh` | `high` |
++| GLM-5.3、GLM-5.3-Flash、Kimi-K2.8-Preview、Kimi-K3.1-Pro、DeepSeek-V4.1-Flash | `low / high / max` | `high` |
++| GLM-5.2、DeepSeek-V4-Flash、DeepSeek-V4-Pro | `high / xhigh` | `high` |
++| Hy3 | `low / high` | `high` |
++| Hy4 preview、Hy4、Xiaomi MiMo-V2.6-Pro | `high` | `high` |
++
++- 有效的显式档位原样转发，不再把 Hy3 的 `low` 强制改为 `high`。`ultra` 不是这个渠道的档位，不映射为 `max`。不支持的显式档位会由 CPA 或插件拒绝；跨协议转换时，CPA 可能先把档位映射为目标模型支持的值，因此应以实际出站参数为准，而非只看客户端或使用记录里的选项。
++- 发送推理档位时，参照原生 WorkBuddy 客户端补充 `reasoning_summary: "auto"`，保留显式的摘要设置（包括 `none`）。这是请求可见摘要，不是模型实际进行内部推理的证明。不会额外插入面向直连 DeepSeek API 的 `thinking.type`。
++- 旧的 `hy3-preview` / `hy3-preview-agent` 保留历史 `high` 默认值，但不再无条件覆盖显式选择；新表未给出其完整档位范围，因此优先采用上游声明的能力，没有声明时使用兼容透传。
++- 动态发现的新模型若提供 `reasoning.supportedEfforts`，读取该能力；若能力未知或不完整，使用 CPA 兼容透传路径，不猜测它支持的档位与默认值。上游明确声明不支持推理的模型仍按非推理模型注册。
++- 思考内容通过 SSE 的 `delta.reasoning_content` 保留，非流式聚合也保留该字段和上游用量。客户端是否显示摘要仍取决于它自己的能力声明与渲染方式。
++
++### 上下文、输出与积分信息
++
++`model_profiles.go` 分开记录输入/输出硬上限、可选上下文窗口、默认窗口和积分倍率。CPA SDK 模型信息能表达硬上限，但不能表达多档窗口选择、默认窗口或本渠道积分倍率：后几项只作为参考元数据保留，**不会自动配置客户端界面，也不参与计费或自动截断**。
++
++例如 Space-Bunny 默认窗口为 1M；DeepSeek-V4-Flash 与 Step-5-Preview 的窗口只有 300K/1M；Hy4 系列输入上限为 960K。GLM-5.3-Flash 的“131K”采用原生目录中的精确输出上限 131072。Hy3 未提供窗口、输出与倍率，继续采用上游元数据，不填造数值。真实模型 ID 保持不变；模型别名仅用于匹配能力，不改写上游 ID。
++
++自定义客户端模型目录如果仍统一提供 `low ... ultra`、默认 `medium`，不会因替换插件而自动修正；部署后还应单独核对客户端目录。不要为了消除错误而给不支持的模型静默降档。
++
++### 离线回归验证
++
++```bash
++go test -count=1 ./...
++go vet ./...
++python3 tests/offline_host_smoke.py \
++--cpa-core /absolute/path/to/cli-proxy-api \
++--output /absolute/path/to/test-results
++```
++
++集成脚本要求 Go、CGO 工具链和已缓存的模块依赖，使用 CPA v8 配置格式。它复制源码并临时加入内存 HTTP 模拟层，使用假凭据和独立本机端口，验证真实宿主的 Chat Completions/Responses、流式/非流式、各档位与默认值、错误档位及摘要事件。结果与宿主日志保存在指定输出目录；退出时停止测试实例，不触碰现有服务或安装目录。
++
++**集成脚本的临时库含模拟响应，绝不能部署。** 实际插件应从未经诊断注入的仓库源码单独构建。离线测试能证明参数转发与模拟推理事件转换，不能证明真实上游一定返回摘要、消耗多少推理 token，或桌面端一定显示“思考中”。
+
+ ## 流式
+
+--- /dev/null
++++ b/model_profiles.go
+@@ -0,0 +1,223 @@
++package main
++
++import (
++	"encoding/json"
++	"fmt"
++	"strings"
++
++	"github.com/router-for-me/CLIProxyAPI/v7/sdk/pluginapi"
++)
++
++// Channel profiles supplied on 2026-11-09. These describe CodeBuddy's channel,
++// not the public APIs of the underlying model vendors. Selection defaults and
++// credit multipliers are reference metadata, NOT SDK limits or billing rules.
++// Hy3's window/output/pricing were not supplied and remain upstream-controlled.
++type modelProfile struct {
++	ID, Name                string
++	Aliases                 []string
++	Efforts                 []string
++	DefaultEffort           string
++	InputLimit, OutputLimit int64
++	ContextWindows          []int64
++	DefaultContext          int64
++	CreditMultiplier        string
++}
++
++var channelModelProfiles = []modelProfile{
++	{ID: "space-bunny", Name: "Space-Bunny", Efforts: []string{"low", "medium", "high", "xhigh", "max"}, DefaultEffort: "max", InputLimit: 1000000, OutputLimit: 128000, ContextWindows: []int64{300000, 600000, 1000000}, DefaultContext: 1000000, CreditMultiplier: "0.08"},
++	{ID: "minimax-m3.1-flash", Name: "MiniMax-M3.1-Flash", Efforts: []string{"low", "medium", "high", "xhigh", "max"}, DefaultEffort: "max", InputLimit: 1000000, OutputLimit: 128000, ContextWindows: []int64{300000, 600000, 1000000}, DefaultContext: 300000, CreditMultiplier: "0.08"},
++	{ID: "step-5-preview", Name: "Step-5-Preview", Efforts: []string{"low", "medium", "high"}, DefaultEffort: "high", InputLimit: 1000000, OutputLimit: 64000, ContextWindows: []int64{300000, 1000000}, DefaultContext: 300000, CreditMultiplier: "0.33"},
++	// K3-2 is present in the native WorkBuddy catalogue; K3-1 is present in
++	// the local CPA catalogue. Match discovered IDs/names; do not rewrite IDs.
++	{ID: "kimi-k3-2", Name: "Kimi-K3", Aliases: []string{"kimi-k3-1", "kimi-k3"}, Efforts: []string{"low", "high", "xhigh"}, DefaultEffort: "high", InputLimit: 1000000, OutputLimit: 32000, ContextWindows: []int64{300000, 600000, 1000000}, DefaultContext: 300000, CreditMultiplier: "1.62"},
++	{ID: "glm-5.3", Name: "GLM-5.3", Efforts: []string{"low", "high", "max"}, DefaultEffort: "high", InputLimit: 1000000, OutputLimit: 64000, ContextWindows: []int64{300000, 600000, 1000000}, DefaultContext: 300000, CreditMultiplier: "0.69"},
++	// The native catalogue gives the exact integer behind the rounded "131K".
++	{ID: "glm-5.3-flash", Name: "GLM-5.3-Flash", Efforts: []string{"low", "high", "max"}, DefaultEffort: "high", InputLimit: 1000000, OutputLimit: 131072, ContextWindows: []int64{300000, 600000, 1000000}, DefaultContext: 300000, CreditMultiplier: "0.08"},
++	{ID: "kimi-k2.8-preview", Name: "Kimi-K2.8-Preview", Efforts: []string{"low", "high", "max"}, DefaultEffort: "high", InputLimit: 1000000, OutputLimit: 64000, ContextWindows: []int64{300000, 600000, 1000000}, DefaultContext: 300000, CreditMultiplier: "0.77"},
++	{ID: "kimi-k3.1-pro", Name: "Kimi-K3.1-Pro", Efforts: []string{"low", "high", "max"}, DefaultEffort: "high", InputLimit: 1000000, OutputLimit: 32000, ContextWindows: []int64{300000, 600000, 1000000}, DefaultContext: 300000, CreditMultiplier: "0.97"},
++	{ID: "deepseek-v4.1-flash", Name: "DeepSeek-V4.1-Flash", Efforts: []string{"low", "high", "max"}, DefaultEffort: "high", InputLimit: 1000000, OutputLimit: 128000, ContextWindows: []int64{300000, 600000, 1000000}, DefaultContext: 300000, CreditMultiplier: "0.11"},
++	{ID: "glm-5.2", Name: "GLM-5.2", Efforts: []string{"high", "xhigh"}, DefaultEffort: "high", InputLimit: 1000000, OutputLimit: 64000, ContextWindows: []int64{300000, 600000, 1000000}, DefaultContext: 300000, CreditMultiplier: "0.79"},
++	{ID: "deepseek-v4-flash", Name: "DeepSeek-V4-Flash", Efforts: []string{"high", "xhigh"}, DefaultEffort: "high", InputLimit: 1000000, OutputLimit: 50000, ContextWindows: []int64{300000, 1000000}, DefaultContext: 300000, CreditMultiplier: "0.17"},
++	{ID: "deepseek-v4-pro", Name: "DeepSeek-V4-Pro", Efforts: []string{"high", "xhigh"}, DefaultEffort: "high", InputLimit: 1000000, OutputLimit: 128000, ContextWindows: []int64{300000, 600000, 1000000}, DefaultContext: 300000, CreditMultiplier: "0.51"},
++	{ID: "hy3", Name: "Hy3", Aliases: []string{"hy3-x"}, Efforts: []string{"low", "high"}, DefaultEffort: "high"},
++	{ID: "hy4-preview", Name: "Hy4 preview", Efforts: []string{"high"}, DefaultEffort: "high", InputLimit: 960000, OutputLimit: 64000, ContextWindows: []int64{300000, 600000, 960000}, DefaultContext: 300000, CreditMultiplier: "0.29"},
++	{ID: "hy4", Name: "Hy4", Efforts: []string{"high"}, DefaultEffort: "high", InputLimit: 960000, OutputLimit: 64000, ContextWindows: []int64{300000, 600000, 960000}, DefaultContext: 300000, CreditMultiplier: "0.00"},
++	{ID: "mimo-v2.6-pro", Name: "Xiaomi MiMo-V2.6-Pro", Efforts: []string{"high"}, DefaultEffort: "high", InputLimit: 1000000, OutputLimit: 128000, ContextWindows: []int64{300000, 600000, 1000000}, DefaultContext: 300000, CreditMultiplier: "0.13"},
++	// Keep the old preview IDs usable without inventing their current effort
++	// range. The previous family override supplied high even when omitted.
++	{ID: "hy3-preview", Name: "Hy3 Preview", DefaultEffort: "high"},
++	{ID: "hy3-preview-agent", Name: "Hy3 Preview Agent", DefaultEffort: "high"},
++}
++
++func profileName(s string) string {
++	return strings.NewReplacer("-", "", "_", "", " ", "").Replace(strings.ToLower(strings.TrimSpace(s)))
++}
++
++func findModelProfile(names ...string) *modelProfile {
++	for _, name := range names {
++		key := profileName(name)
++		if key == "" {
++			continue
++		}
++		for i := range channelModelProfiles {
++			p := &channelModelProfiles[i]
++			if key == profileName(p.ID) || key == profileName(p.Name) {
++				return p
++			}
++			for _, alias := range p.Aliases {
++				if key == profileName(alias) {
++					return p
++				}
++			}
++		}
++	}
++	return nil
++}
++
++func applyKnownModelProfile(m *pluginapi.ModelInfo) bool {
++	p := findModelProfile(m.ID, m.DisplayName)
++	if p == nil {
++		return false
++	}
++	if len(p.Efforts) > 0 {
++		m.Thinking = &pluginapi.ThinkingSupport{Levels: append([]string(nil), p.Efforts...)}
++		m.UserDefined = false
++	} else if m.Thinking == nil && !m.UserDefined {
++		// A default-only policy must not override an explicit upstream
++		// non-reasoning declaration. Unknown metadata already uses the
++		// UserDefined compatibility path; keep that distinct from false.
++		return false
++	}
++	if !hasEffort(m.SupportedParameters, "reasoning_effort") {
++		m.SupportedParameters = append(m.SupportedParameters, "reasoning_effort")
++	}
++	if p.InputLimit > 0 {
++		m.InputTokenLimit = p.InputLimit
++		m.ContextLength = p.InputLimit
++	}
++	if p.OutputLimit > 0 {
++		m.OutputTokenLimit = p.OutputLimit
++		m.MaxCompletionTokens = p.OutputLimit
++	}
++	return true
++}
++
++func hasEffort(levels []string, effort string) bool {
++	for _, level := range levels {
++		if level == effort {
++			return true
++		}
++	}
++	return false
++}
++
++// Reuse the credential-scoped discovery cache for channel profiles matched by
++// display name (the real upstream ID may differ from the model's UI name).
++func requestModelProfile(req pluginapi.ExecutorRequest, model string) (*modelProfile, []string) {
++	profile := findModelProfile(model)
++	if profile != nil && len(profile.Efforts) > 0 {
++		return profile, profile.Efforts
++	}
++	if cached, ok := discoveredModels.Load(modelCacheKey(req.StorageJSON)); ok {
++		for _, m := range cached.([]pluginapi.ModelInfo) {
++			if m.ID != model {
++				continue
++			}
++			if m.Thinking == nil && !m.UserDefined {
++				// A non-nil empty set means explicitly no reasoning support;
++				// nil means unknown capability and permits compatibility.
++				return nil, []string{}
++			}
++			if profile == nil {
++				profile = findModelProfile(m.DisplayName)
++			}
++			if profile != nil && len(profile.Efforts) > 0 {
++				return profile, profile.Efforts
++			}
++			if m.Thinking != nil {
++				levels := append([]string(nil), m.Thinking.Levels...)
++				if m.Thinking.ZeroAllowed && !hasEffort(levels, "none") {
++					levels = append(levels, "none")
++				}
++				return profile, levels
++			}
++		}
++	}
++	return profile, nil
++}
++
++// Prepare only CodeBuddy's named effort and summary controls. CPA translates
++// Responses to chat-completions before calling this executor. RawMessage keeps
++// unrelated JSON numbers/fields unchanged when defaults are added.
++func prepareReasoningForUpstream(payload []byte, req pluginapi.ExecutorRequest) ([]byte, error) {
++	var body map[string]json.RawMessage
++	if err := json.Unmarshal(payload, &body); err != nil || body == nil {
++		return nil, fmt.Errorf("invalid chat completion payload")
++	}
++	model := req.Model
++	if model == "" {
++		_ = json.Unmarshal(body["model"], &model)
++	}
++	profile, levels := requestModelProfile(req, model)
++	effort := ""
++	if raw, ok := body["reasoning_effort"]; ok {
++		if err := json.Unmarshal(raw, &effort); err != nil {
++			return nil, fmt.Errorf("reasoning_effort must be a string")
++		}
++		effort = strings.ToLower(strings.TrimSpace(effort))
++	}
++	if effort == "" && profile != nil {
++		effort = profile.DefaultEffort
++	}
++	if effort != "" && levels != nil && !hasEffort(levels, effort) {
++		if len(levels) == 0 {
++			return nil, fmt.Errorf("model %s does not support reasoning_effort", model)
++		}
++		return nil, fmt.Errorf("model %s does not support reasoning_effort %q; supported: %s", model, effort, strings.Join(levels, ", "))
++	}
++	changed := false
++	if effort != "" {
++		encoded, _ := json.Marshal(effort)
++		if string(body["reasoning_effort"]) != string(encoded) {
++			body["reasoning_effort"] = encoded
++			changed = true
++		}
++		// Match native WorkBuddy's injectReasoningSummaryIfNeeded. This is a
++		// request for visible summaries, not evidence of internal reasoning.
++		if _, present := body["reasoning_summary"]; !present {
++			summary := requestReasoningSummary(body, req.OriginalRequest)
++			if len(summary) == 0 {
++				summary = json.RawMessage(`"auto"`)
++			}
++			body["reasoning_summary"] = summary
++			changed = true
++		}
++	}
++	if !changed {
++		return payload, nil
++	}
++	return json.Marshal(body)
++}
++
++func requestReasoningSummary(body map[string]json.RawMessage, original []byte) json.RawMessage {
++	// Keep an explicit translated/nested summary ahead of the original request.
++	var nested map[string]json.RawMessage
++	if json.Unmarshal(body["reasoning"], &nested) == nil {
++		if raw, ok := nested["summary"]; ok {
++			return raw
++		}
++	}
++	var source map[string]json.RawMessage
++	if json.Unmarshal(original, &source) != nil {
++		return nil
++	}
++	if raw, ok := source["reasoning_summary"]; ok {
++		return raw
++	}
++	if json.Unmarshal(source["reasoning"], &nested) == nil {
++		if raw, ok := nested["summary"]; ok {
++			return raw
++		}
++	}
++	return nil
++}
+--- /dev/null
++++ b/reasoning_test.go
+@@ -0,0 +1,417 @@
++package main
++
++import (
++	"encoding/json"
++	"net/http"
++	"reflect"
++	"strings"
++	"testing"
++
++	"github.com/router-for-me/CLIProxyAPI/v7/sdk/pluginapi"
++)
++
++// Independent fixtures from the channel's supplied capability table, not from
++// the implementation's profile lookup. A missing Thinking declaration causes
++// CPA to strip otherwise-valid named efforts before the executor runs.
++var expectedModelSpecs = []struct {
++	id, name, levels, defaultEffort string
++	input, output                   int64
++}{
++	{"space-bunny", "Space-Bunny", "low,medium,high,xhigh,max", "max", 1000000, 128000},
++	{"minimax-m3.1-flash", "MiniMax-M3.1-Flash", "low,medium,high,xhigh,max", "max", 1000000, 128000},
++	{"step-5-preview", "Step-5-Preview", "low,medium,high", "high", 1000000, 64000},
++	{"kimi-k3-2", "Kimi-K3", "low,high,xhigh", "high", 1000000, 32000},
++	{"glm-5.3", "GLM-5.3", "low,high,max", "high", 1000000, 64000},
++	{"glm-5.3-flash", "GLM-5.3-Flash", "low,high,max", "high", 1000000, 131072},
++	{"kimi-k2.8-preview", "Kimi-K2.8-Preview", "low,high,max", "high", 1000000, 64000},
++	{"kimi-k3.1-pro", "Kimi-K3.1-Pro", "low,high,max", "high", 1000000, 32000},
++	{"deepseek-v4.1-flash", "DeepSeek-V4.1-Flash", "low,high,max", "high", 1000000, 128000},
++	{"glm-5.2", "GLM-5.2", "high,xhigh", "high", 1000000, 64000},
++	{"deepseek-v4-flash", "DeepSeek-V4-Flash", "high,xhigh", "high", 1000000, 50000},
++	{"deepseek-v4-pro", "DeepSeek-V4-Pro", "high,xhigh", "high", 1000000, 128000},
++	{"hy3", "Hy3", "low,high", "high", 0, 0},
++	{"hy4-preview", "Hy4 preview", "high", "high", 960000, 64000},
++	{"hy4", "Hy4", "high", "high", 960000, 64000},
++	{"mimo-v2.6-pro", "Xiaomi MiMo-V2.6-Pro", "high", "high", 1000000, 128000},
++}
++
++func TestDiscoveryAdvertisesChannelReasoningAndHardLimits(t *testing.T) {
++	for _, tc := range expectedModelSpecs {
++		t.Run(tc.id, func(t *testing.T) {
++			// Deliberately stale generic upstream values must not override the channel
++			// table. In particular 300K is a selection default, not the hard limit.
++			body, _ := json.Marshal(map[string]any{"data": []any{map[string]any{
++				"id": tc.id, "name": tc.name, "maxInputTokens": 192000, "maxOutputTokens": 8192,
++				"supportsReasoning": true, "onlyReasoning": true,
++				"reasoning": map[string]any{"effort": "medium", "supportedEfforts": []string{"medium"}},
++			}}})
++			client := &http.Client{Transport: modelRoundTripFunc(func(r *http.Request) (*http.Response, error) { return modelHTTPResponse(200, string(body)), nil })}
++			models, err := fetchModels(client, endpointModels, &storedAuth{})
++			if err != nil {
++				t.Fatal(err)
++			}
++			if len(models) != 1 {
++				t.Fatalf("models=%d", len(models))
++			}
++			m := models[0]
++			if m.Thinking == nil {
++				t.Fatal("missing Thinking metadata: CPA would strip reasoning_effort")
++			}
++			if !reflect.DeepEqual(m.Thinking.Levels, strings.Split(tc.levels, ",")) || m.UserDefined || m.Thinking.ZeroAllowed || m.Thinking.DynamicAllowed {
++				t.Fatalf("incorrect capability: %#v, userDefined=%v", m.Thinking, m.UserDefined)
++			}
++			if tc.input > 0 && (m.InputTokenLimit != tc.input || m.ContextLength != tc.input) {
++				t.Errorf("input/context=%d/%d, want %d", m.InputTokenLimit, m.ContextLength, tc.input)
++			}
++			if tc.output > 0 && (m.OutputTokenLimit != tc.output || m.MaxCompletionTokens != tc.output) {
++				t.Errorf("output/completion=%d/%d, want %d", m.OutputTokenLimit, m.MaxCompletionTokens, tc.output)
++			}
++		})
++	}
++}
++
++func TestStaticModelsHaveReasoningMetadataWhenKnown(t *testing.T) {
++	for _, m := range wbModels() {
++		switch m.ID {
++		case "glm-5.2", "deepseek-v4-flash", "deepseek-v4-pro":
++			if m.Thinking == nil || !reflect.DeepEqual(m.Thinking.Levels, []string{"high", "xhigh"}) || m.UserDefined {
++				t.Errorf("static fallback loses capability for %s: %#v", m.ID, m)
++			}
++		case "hy3":
++			if m.Thinking == nil || !reflect.DeepEqual(m.Thinking.Levels, []string{"low", "high"}) {
++				t.Error("static Hy3 must support low and high")
++			}
++		}
++	}
++}
++
++func TestDiscoveryHandlesNewReasoningModelsWithoutInventingLevels(t *testing.T) {
++	client := &http.Client{Transport: modelRoundTripFunc(func(r *http.Request) (*http.Response, error) {
++		return modelHTTPResponse(200, `{"data":[
++{"id":"future-declared","supportsReasoning":true,"reasoning":{"supportedEfforts":["low","high","max"]}},
++{"id":"future-opaque","supportsReasoning":true,"onlyReasoning":true},
++{"id":"future-unknown"},
++{"id":"non-reasoning","supportsReasoning":false}
++]}`), nil
++	})}
++	models, err := fetchModels(client, endpointModels, &storedAuth{})
++	if err != nil {
++		t.Fatal(err)
++	}
++	if models[0].Thinking == nil || !reflect.DeepEqual(models[0].Thinking.Levels, []string{"low", "high", "max"}) {
++		t.Error("dropped explicit upstream efforts")
++	}
++	for _, i := range []int{1, 2} {
++		if !models[i].UserDefined || models[i].Thinking != nil {
++			t.Errorf("unknown capability must pass through without guessing: %#v", models[i])
++		}
++	}
++	if models[3].UserDefined || models[3].Thinking != nil {
++		t.Error("explicit non-reasoning model should remain non-reasoning")
++	}
++}
++
++const reasoningFixtureSSE = "data: {\"id\":\"test\",\"model\":\"deepseek-v4.1-flash\",\"choices\":[{\"index\":0,\"delta\":{\"role\":\"assistant\",\"reasoning_content\":\"synthetic-reasoning\",\"content\":\"\"}}]}\n\n" +
++	"data: {\"id\":\"test\",\"choices\":[{\"index\":0,\"delta\":{\"content\":\"42\",\"reasoning_content\":null},\"finish_reason\":\"stop\"}],\"usage\":{\"prompt_tokens\":3,\"completion_tokens\":5,\"completion_tokens_details\":{\"reasoning_tokens\":3}}}\n\n" +
++	"data: [DONE]\n\n"
++
++func executeReasoningFixture(t *testing.T, stream bool, payload map[string]any, original string) (map[string]any, []byte, error) {
++	t.Helper()
++	before := sharedHTTPClient()
++	defer func() { sharedClient = before }()
++	var captured map[string]any
++	sharedClient = &http.Client{Transport: modelRoundTripFunc(func(r *http.Request) (*http.Response, error) {
++		if r.Method != http.MethodPost || r.URL.String() != endpointChat {
++			t.Fatalf("unexpected outbound %s %s", r.Method, r.URL)
++		}
++		if err := json.NewDecoder(r.Body).Decode(&captured); err != nil {
++			t.Fatal(err)
++		}
++		return modelHTTPResponse(200, reasoningFixtureSSE), nil
++	})}
++	data, _ := json.Marshal(payload)
++	storage, _ := json.Marshal(storedAuth{Auth: storedTokens{AccessToken: "offline-test-only"}})
++	model, _ := payload["model"].(string)
++	req := pluginapi.ExecutorRequest{Model: model, Payload: data, StorageJSON: storage, OriginalRequest: []byte(original)}
++	raw, _ := json.Marshal(req)
++	var result []byte
++	var err error
++	if stream {
++		result, err = handleExecStream(raw)
++	} else {
++		result, err = handleExecExecute(raw)
++	}
++	return captured, result, err
++}
++
++func TestExecutorForwardsEverySupportedEffortAndDefaults(t *testing.T) {
++	for _, tc := range expectedModelSpecs {
++		for _, effort := range append(strings.Split(tc.levels, ","), "") {
++			for _, stream := range []bool{false, true} {
++				label := effort
++				if label == "" {
++					label = "default"
++				}
++				mode := "execute"
++				if stream {
++					mode = "stream"
++				}
++				t.Run(tc.id+"/"+label+"/"+mode, func(t *testing.T) {
++					payload := map[string]any{"model": tc.id, "messages": []any{}, "stream": true}
++					if effort != "" {
++						payload["reasoning_effort"] = effort
++					}
++					captured, _, err := executeReasoningFixture(t, stream, payload, "")
++					if err != nil {
++						t.Fatal(err)
++					}
++					want := effort
++					if want == "" {
++						want = tc.defaultEffort
++					}
++					if captured["reasoning_effort"] != want {
++						t.Errorf("outgoing effort=%v, want %s", captured["reasoning_effort"], want)
++					}
++					if captured["reasoning_summary"] != "auto" {
++						t.Errorf("native-client-compatible summary absent: %v", captured["reasoning_summary"])
++					}
++					if _, ok := captured["thinking"]; ok {
++						t.Error("must not invent direct-DeepSeek thinking.type for CodeBuddy")
++					}
++				})
++			}
++		}
++	}
++}
++
++func TestExecutorRejectsUnsupportedEffortsBeforeHTTP(t *testing.T) {
++	for _, effort := range []any{"medium", "xhigh", "ultra", "none", "auto", 123, map[string]any{"effort": "high"}} {
++		for _, stream := range []bool{false, true} {
++			captured, _, err := executeReasoningFixture(t, stream, map[string]any{"model": "deepseek-v4.1-flash", "messages": []any{}, "reasoning_effort": effort}, "")
++			if err == nil || captured != nil {
++				t.Errorf("unsupported effort %#v reached HTTP (stream=%v): captured=%v, err=%v", effort, stream, captured, err)
++			}
++		}
++	}
++}
++
++func TestExecutorPreservesExplicitSummaryChoice(t *testing.T) {
++	for _, tc := range []struct {
++		field          any
++		original, want string
++	}{
++		{"none", "", "none"}, {"detailed", "", "detailed"},
++		{nil, `{"reasoning":{"effort":"high","summary":"none"}}`, "none"},
++		{nil, `{"reasoning":{"effort":"high","summary":"detailed"}}`, "detailed"},
++	} {
++		payload := map[string]any{"model": "deepseek-v4.1-flash", "reasoning_effort": "high", "messages": []any{}}
++		if tc.field != nil {
++			payload["reasoning_summary"] = tc.field
++		}
++		captured, _, err := executeReasoningFixture(t, true, payload, tc.original)
++		if err != nil {
++			t.Fatal(err)
++		}
++		if captured["reasoning_summary"] != tc.want {
++			t.Errorf("summary=%v, want %s", captured["reasoning_summary"], tc.want)
++		}
++	}
++}
++
++func TestSystemTemplateRewriteDoesNotOverrideHy3Low(t *testing.T) {
++	raw := rewriteSystemForUpstream([]byte(`{"model":"hy3","reasoning_effort":"low","messages":[{"role":"system","content":"You are Claude Code, Anthropic's official CLI for Claude."}]}`))
++	var obj map[string]any
++	if err := json.Unmarshal(raw, &obj); err != nil {
++		t.Fatal(err)
++	}
++	if obj["reasoning_effort"] != "low" {
++		t.Fatal("system sanitization must not overwrite reasoning choice")
++	}
++	if !strings.Contains(string(raw), "CLI tool") {
++		t.Error("lost existing template compatibility")
++	}
++}
++
++func TestExecutorPreservesReasoningAndUsageInBothModes(t *testing.T) {
++	for _, stream := range []bool{false, true} {
++		_, raw, err := executeReasoningFixture(t, stream, map[string]any{"model": "deepseek-v4.1-flash", "messages": []any{}, "stream": true, "reasoning_effort": "high"}, "")
++		if err != nil {
++			t.Fatal(err)
++		}
++		var env struct {
++			Result json.RawMessage `json:"result"`
++		}
++		if err := json.Unmarshal(raw, &env); err != nil {
++			t.Fatal(err)
++		}
++		var messages []map[string]any
++		if stream {
++			var res streamResponse
++			if err := json.Unmarshal(env.Result, &res); err != nil {
++				t.Fatal(err)
++			}
++			for _, chunk := range res.Chunks {
++				var m map[string]any
++				if err := json.Unmarshal([]byte(stripDataPrefix(string(chunk.Payload))), &m); err != nil {
++					t.Fatal(err)
++				}
++				messages = append(messages, m)
++			}
++		} else {
++			var res pluginapi.ExecutorResponse
++			if err := json.Unmarshal(env.Result, &res); err != nil {
++				t.Fatal(err)
++			}
++			var m map[string]any
++			if err := json.Unmarshal(res.Payload, &m); err != nil {
++				t.Fatal(err)
++			}
++			messages = append(messages, m)
++		}
++		reason := ""
++		tokens := float64(0)
++		for _, m := range messages {
++			for _, c := range m["choices"].([]any) {
++				choice := c.(map[string]any)
++				key := "message"
++				if stream {
++					key = "delta"
++				}
++				if msg, ok := choice[key].(map[string]any); ok {
++					if s, ok := msg["reasoning_content"].(string); ok {
++						reason += s
++					}
++				}
++			}
++			if u, ok := m["usage"].(map[string]any); ok {
++				tokens = u["completion_tokens_details"].(map[string]any)["reasoning_tokens"].(float64)
++			}
++		}
++		if reason != "synthetic-reasoning" || tokens != 3 {
++			t.Errorf("stream=%v reasoning=%q tokens=%v", stream, reason, tokens)
++		}
++	}
++}
++
++// The host can supply equivalent provider credentials with different JSON key
++// order/host-only fields at discovery and execution. A raw-byte cache key loses
++// the discovered display-name policy and therefore the model's default effort.
++func TestDiscoveredDisplayNameDefaultSurvivesCredentialReserialization(t *testing.T) {
++	original := sharedHTTPClient()
++	defer func() { sharedClient = original }()
++	sharedClient = &http.Client{Transport: modelRoundTripFunc(func(r *http.Request) (*http.Response, error) {
++		return modelHTTPResponse(200, `{"data":[{"id":"opaque-channel-test-id","name":"DeepSeek-V4.1-Flash"}]}`), nil
++	})}
++	storage := []byte(`{"type":"workbuddy","auth":{"accessToken":"offline-test-only"},"account":{}}`)
++	request, _ := json.Marshal(pluginapi.AuthModelRequest{StorageJSON: storage})
++	models := modelsFromRPC(t, request)
++	if len(models) != 1 || models[0].Thinking == nil {
++		t.Fatal("profile discovery failed")
++	}
++	captured, _, err := executeReasoningFixture(t, true, map[string]any{"model": "opaque-channel-test-id", "messages": []any{}}, "")
++	if err != nil {
++		t.Fatal(err)
++	}
++	if captured["reasoning_effort"] != "high" {
++		t.Fatalf("lost default after host reserialized the same credential: %v", captured)
++	}
++}
++
++func TestDiscoveredOptionalThinkingCanBeDisabled(t *testing.T) {
++	original := sharedHTTPClient()
++	defer func() { sharedClient = original }()
++	sharedClient = &http.Client{Transport: modelRoundTripFunc(func(r *http.Request) (*http.Response, error) {
++		return modelHTTPResponse(200, `{"data":[{"id":"future-toggle-model","supportsReasoning":true,"reasoning":{"supportedEfforts":["low","high"],"canDisableThinking":true}}]}`), nil
++	})}
++	storage, _ := json.Marshal(storedAuth{Auth: storedTokens{AccessToken: "offline-test-only"}})
++	request, _ := json.Marshal(pluginapi.AuthModelRequest{StorageJSON: storage})
++	models := modelsFromRPC(t, request)
++	if len(models) != 1 || models[0].Thinking == nil || !models[0].Thinking.ZeroAllowed {
++		t.Fatal("explicit disable capability lost")
++	}
++	captured, _, err := executeReasoningFixture(t, true, map[string]any{"model": "future-toggle-model", "messages": []any{}, "reasoning_effort": "none", "reasoning_summary": "none"}, "")
++	if err != nil {
++		t.Fatal(err)
++	}
++	if captured["reasoning_effort"] != "none" {
++		t.Fatalf("explicit upstream disable capability was not honored: %v", captured)
++	}
++}
++
++func TestLegacyHy3PreviewPreservesDefaultAndExplicitChoices(t *testing.T) {
++	for _, model := range []string{"hy3-preview", "hy3-preview-agent"} {
++		for _, effort := range []string{"", "low", "high"} {
++			for _, stream := range []bool{false, true} {
++				payload := map[string]any{"model": model, "messages": []any{}}
++				if effort != "" {
++					payload["reasoning_effort"] = effort
++				}
++				captured, _, err := executeReasoningFixture(t, stream, payload, "")
++				if err != nil {
++					t.Fatal(err)
++				}
++				want := effort
++				if want == "" {
++					want = "high"
++				}
++				if captured["reasoning_effort"] != want {
++					t.Errorf("model=%s stream=%v effort=%q got=%v want=%s", model, stream, effort, captured["reasoning_effort"], want)
++				}
++			}
++		}
++	}
++}
++
++func TestLegacyDefaultOnlyProfileKeepsDeclaredUpstreamConstraints(t *testing.T) {
++	original := sharedHTTPClient()
++	defer func() { sharedClient = original }()
++	sharedClient = &http.Client{Transport: modelRoundTripFunc(func(r *http.Request) (*http.Response, error) {
++		return modelHTTPResponse(200, `{"data":[{"id":"hy3-preview","supportsReasoning":true,"reasoning":{"supportedEfforts":["high"]}}]}`), nil
++	})}
++	storage, _ := json.Marshal(storedAuth{Auth: storedTokens{AccessToken: "offline-test-only"}})
++	request, _ := json.Marshal(pluginapi.AuthModelRequest{StorageJSON: storage})
++	models := modelsFromRPC(t, request)
++	defer discoveredModels.Delete(modelCacheKey(storage))
++	if len(models) != 1 || models[0].UserDefined || models[0].Thinking == nil || !reflect.DeepEqual(models[0].Thinking.Levels, []string{"high"}) {
++		t.Fatalf("default-only profile discarded explicit upstream capability: %#v", models)
++	}
++	captured, _, err := executeReasoningFixture(t, true, map[string]any{"model": "hy3-preview", "messages": []any{}, "reasoning_effort": "low"}, "")
++	if err == nil || captured != nil {
++		t.Fatalf("upstream-declared high-only model accepted low: captured=%v err=%v", captured, err)
++	}
++	captured, _, err = executeReasoningFixture(t, true, map[string]any{"model": "hy3-preview", "messages": []any{}}, "")
++	if err != nil || captured["reasoning_effort"] != "high" {
++		t.Fatalf("lost legacy default: captured=%v err=%v", captured, err)
++	}
++}
++
++func TestLegacyDefaultDoesNotOverrideExplicitNonReasoningCapability(t *testing.T) {
++	original := sharedHTTPClient()
++	defer func() { sharedClient = original }()
++	sharedClient = &http.Client{Transport: modelRoundTripFunc(func(r *http.Request) (*http.Response, error) {
++		return modelHTTPResponse(200, `{"data":[{"id":"hy3-preview","supportsReasoning":false},{"id":"hy3-preview-agent","supportsReasoning":false}]}`), nil
++	})}
++	storage, _ := json.Marshal(storedAuth{Auth: storedTokens{AccessToken: "offline-test-only"}})
++	request, _ := json.Marshal(pluginapi.AuthModelRequest{StorageJSON: storage})
++	models := modelsFromRPC(t, request)
++	defer discoveredModels.Delete(modelCacheKey(storage))
++	for _, m := range models {
++		if m.UserDefined || m.Thinking != nil {
++			t.Errorf("negative capability became unknown: %#v", m)
++		}
++		if hasEffort(m.SupportedParameters, "reasoning_effort") {
++			t.Errorf("non-reasoning model advertises reasoning_effort: %s", m.ID)
++		}
++		captured, _, err := executeReasoningFixture(t, true, map[string]any{"model": m.ID, "messages": []any{}}, "")
++		if err != nil {
++			t.Fatal(err)
++		}
++		if _, ok := captured["reasoning_effort"]; ok {
++			t.Errorf("legacy default overrode explicit negative capability: %v", captured)
++		}
++		captured, _, err = executeReasoningFixture(t, true, map[string]any{"model": m.ID, "messages": []any{}, "reasoning_effort": "high"}, "")
++		if err == nil || captured != nil {
++			t.Errorf("explicit non-reasoning capability accepted effort: captured=%v err=%v", captured, err)
++		}
++	}
++}
+--- /dev/null
++++ b/tests/offline_host_smoke.py
+@@ -0,0 +1,241 @@
++#!/usr/bin/env python3
++"""Exercise the actual CPA host/plugin ABI without contacting any upstream.
++
++Builds a COPY with an in-memory, deny-by-default HTTP transport. Never install
++that diagnostic library: it returns synthetic reasoning and captured parameters.
++The caller supplies a CGO-enabled CPA executable; no live account is read.
++"""
++import argparse
++import json
++import os
++from pathlib import Path
++import shutil
++import socket
++import subprocess
++import sys
++import tempfile
++import time
++import urllib.error
++import urllib.request
++
++# Independent expectations from the channel table. Native IDs can differ from
++# UI names: Kimi K3-1/K3-2 and a discovered opaque ID are covered explicitly.
++SPECS = [
++("deepseek-v4.1-flash", "DeepSeek-V4.1-Flash", ["low", "high", "max"], "high"),
++("space-bunny", "Space-Bunny", ["low", "medium", "high", "xhigh", "max"], "max"),
++("minimax-m3.1-flash", "MiniMax-M3.1-Flash", ["low", "medium", "high", "xhigh", "max"], "max"),
++("step-5-preview", "Step-5-Preview", ["low", "medium", "high"], "high"),
++("kimi-k3-2", "Kimi-K3", ["low", "high", "xhigh"], "high"),
++("kimi-k3-1", "Kimi-K3", ["low", "high", "xhigh"], "high"),
++("glm-5.3", "GLM-5.3", ["low", "high", "max"], "high"),
++("glm-5.3-flash", "GLM-5.3-Flash", ["low", "high", "max"], "high"),
++("kimi-k2.8-preview", "Kimi-K2.8-Preview", ["low", "high", "max"], "high"),
++("kimi-k3.1-pro", "Kimi-K3.1-Pro", ["low", "high", "max"], "high"),
++("glm-5.2", "GLM-5.2", ["high", "xhigh"], "high"),
++("deepseek-v4-flash", "DeepSeek-V4-Flash", ["high", "xhigh"], "high"),
++("deepseek-v4-pro", "DeepSeek-V4-Pro", ["high", "xhigh"], "high"),
++("hy3", "Hy3", ["low", "high"], "high"),
++# Legacy opaque capabilities: these choices exercise passthrough, not a
++# claim that their complete supported range is known.
++("hy3-preview", "Hy3 Preview", ["low", "high"], "high"),
++("hy3-preview-agent", "Hy3 Preview Agent", ["low", "high"], "high"),
++("hy4-preview", "Hy4 preview", ["high"], "high"),
++("hy4", "Hy4", ["high"], "high"),
++("mimo-v2.6-pro", "Xiaomi MiMo-V2.6-Pro", ["high"], "high"),
++("opaque-channel-id", "DeepSeek-V4.1-Flash", ["low", "high", "max"], "high"),
++]
++
++TRANSPORT = r'''
++package main
++import("bytes";"encoding/json";"fmt";"io";"net/http")
++type offlineTransport struct{}
++func(offlineTransport)RoundTrip(r *http.Request)(*http.Response,error){
++var data string
++if r.URL.Path=="/v3/config" {
++data=CATALOG_JSON
++}else if r.URL.Path=="/v2/chat/completions" {
++var in map[string]any
++if err:=json.NewDecoder(r.Body).Decode(&in);err!=nil{return nil,err}
++capture:=map[string]any{}
++for _,key:=range []string{"model","reasoning_effort","reasoning_summary","thinking"}{if v,ok:=in[key];ok{capture[key]=v}}
++raw,_:=json.Marshal(capture)
++first,_:=json.Marshal(map[string]any{"id":"offline","object":"chat.completion.chunk","model":in["model"],"choices":[]any{map[string]any{"index":0,"delta":map[string]any{"role":"assistant","reasoning_content":"synthetic-reasoning"}}}})
++chunk,_:=json.Marshal(map[string]any{"id":"offline","object":"chat.completion.chunk","model":in["model"],"choices":[]any{map[string]any{"index":0,"delta":map[string]any{"content":string(raw)}}}})
++data="data: "+string(first)+"\n\ndata: "+string(chunk)+"\n\ndata: {\"id\":\"offline\",\"object\":\"chat.completion.chunk\",\"choices\":[{\"index\":0,\"delta\":{},\"finish_reason\":\"stop\"}],\"usage\":{\"prompt_tokens\":1,\"completion_tokens\":3,\"total_tokens\":4,\"completion_tokens_details\":{\"reasoning_tokens\":2}}}\n\ndata: [DONE]\n\n"
++}else{return nil,fmt.Errorf("offline test blocked endpoint %s",r.URL.Path)}
++return &http.Response{StatusCode:200,Header:http.Header{"Content-Type":[]string{"text/event-stream"}},Body:io.NopCloser(bytes.NewBufferString(data)),Request:r},nil
++}
++func init(){sharedHTTPClient();sharedClient=&http.Client{Transport:offlineTransport{}}}
++'''
++
++
++def decode_result(route, stream, response):
++if not stream:
++obj = json.load(response)
++if route == "chat/completions":
++msg = obj["choices"][0]["message"]
++return json.loads(msg["content"]), msg.get("reasoning_content", ""), []
++outputs = obj.get("output", [])
++text = "".join(c.get("text", "") for o in outputs if o.get("type") == "message" for c in o.get("content", []))
++reasoning = "".join(c.get("text", "") for o in outputs if o.get("type") == "reasoning" for c in o.get("summary", []))
++return json.loads(text), reasoning, []
++text, reasoning, events = "", "", []
++for line in response:
++line = line.decode().strip()
++if not line.startswith("data:") or line[5:].strip() == "[DONE]":
++continue
++obj = json.loads(line[5:])
++event = obj.get("type", "")
++events.append(event)
++if event == "response.output_text.delta":
++text += obj.get("delta", "")
++if event == "response.reasoning_summary_text.delta":
++reasoning += obj.get("delta", "")
++for choice in obj.get("choices", []):
++delta = choice.get("delta", {})
++text += delta.get("content") or ""
++reasoning += delta.get("reasoning_content") or ""
++return json.loads(text), reasoning, events
++
++
++def main():
++parser = argparse.ArgumentParser(description=__doc__)
++parser.add_argument("--cpa-core", required=True, type=Path)
++parser.add_argument("--source", type=Path, default=Path(__file__).resolve().parents[1])
++parser.add_argument("--output", required=True, type=Path)
++parser.add_argument("--go", default="go")
++args = parser.parse_args()
++args.output = args.output.resolve()
++args.output.mkdir(parents=True, exist_ok=True)
++results = []
++# Allocate only a fresh local port; never connect to/restart a live CPA.
++with socket.socket() as s:
++s.bind(("127.0.0.1", 0))
++port = s.getsockname()[1]
++with tempfile.TemporaryDirectory(prefix="offline-host-", dir=args.output) as temporary:
++root = Path(temporary)
++src = root / "src"
++src.mkdir()
++for p in args.source.iterdir():
++if p.is_file() and (p.suffix == ".go" or p.name in ("go.mod", "go.sum")):
++shutil.copy2(p, src / p.name)
++catalogue = {"code": 0, "data": {"models": [{"id": m, "name": n, "supportsReasoning": True, "onlyReasoning": True} for m, n, _, _ in SPECS]}}
++# Two JSON encodings create a valid Go string literal containing JSON.
++transport = TRANSPORT.replace("CATALOG_JSON", json.dumps(json.dumps(catalogue)))
++(src / "offline_transport.go").write_text(transport)
++plugin_dir = root / "plugins"
++plugin_dir.mkdir()
++suffix = ".dylib" if sys.platform == "darwin" else ".so"
++env = dict(os.environ, CGO_ENABLED="1", GOTOOLCHAIN="local", GOPROXY="off", GOSUMDB="off")
++subprocess.run([args.go, "build", "-mod=readonly", "-buildmode=c-shared", "-o", str(plugin_dir / ("workbuddy" + suffix)), "."], cwd=src, env=env, check=True)
++auth = root / "auth"
++auth.mkdir()
++(auth / "workbuddy.json").write_text(json.dumps({"type": "workbuddy", "disabled": False, "auth": {"accessToken": "offline-fake-token", "expiresAt": 4102444800000}, "account": {}}))
++(root / "home").mkdir()
++config = f'''config-version: 8
++server:
++host: "127.0.0.1"
++port: {port}
++discovery:
++enabled: false
++access:
++api-keys: ["offline-local-test-key"]
++oauth:
++auth-dir: {json.dumps(str(auth))}
++plugins:
++enabled: true
++dir: {json.dumps(str(plugin_dir))}
++configs:
++workbuddy:
++enabled: true
++management:
++disable-control-panel: true
++disable-auto-update-panel: true
++observability:
++logs:
++debug: true
++request-log: false
++logging-to-file: false
++'''
++(root / "config.yaml").write_text(config)
++headers = {"Authorization": "Bearer offline-local-test-key", "Content-Type": "application/json"}
++base = f"http://127.0.0.1:{port}/v1/"
++hostenv = {"HOME": str(root / "home"), "PATH": os.environ.get("PATH", "/usr/bin:/bin"), "TMPDIR": os.environ.get("TMPDIR", "/tmp")}
++with (args.output / "host.log").open("wb") as log:
++proc = subprocess.Popen([str(args.cpa_core.resolve()), "-local-model", "-config", str(root / "config.yaml")], cwd=root, env=hostenv, stdout=log, stderr=subprocess.STDOUT)
++try:
++ready = False
++for _ in range(100):
++if proc.poll() is not None:
++break
++try:
++with urllib.request.urlopen(urllib.request.Request(base + "models", headers=headers), timeout=1) as response:
++ids = {x["id"] for x in json.load(response)["data"]}
++if all(m in ids for m, _, _, _ in SPECS):
++ready = True
++break
++except (urllib.error.URLError, TimeoutError):
++pass
++time.sleep(0.1)
++if not ready:
++raise RuntimeError("isolated host not ready; inspect host.log")
++
++def request(route, model, effort, stream, summary="auto"):
++body = {"model": model, "stream": stream}
++if route == "responses":
++body["input"] = "offline fixture"
++body["reasoning"] = {"summary": summary}
++if effort is not None:
++body["reasoning"]["effort"] = effort
++else:
++body["messages"] = [{"role": "user", "content": "offline fixture"}]
++body["reasoning_summary"] = summary
++if effort is not None:
++body["reasoning_effort"] = effort
++req = urllib.request.Request(base + route, data=json.dumps(body).encode(), headers=headers)
++try:
++with urllib.request.urlopen(req, timeout=15) as response:
++capture, reasoning, events = decode_result(route, stream, response)
++return {"status": response.status, "capture": capture, "reasoning": reasoning, "events": events}
++except urllib.error.HTTPError as err:
++return {"status": err.code, "error": err.read().decode()}
++
++# Regression first: this fails against the unmodified plugin.
++for model, _, efforts, default in SPECS:
++for route in ("responses", "chat/completions"):
++for stream in (True, False):
++for effort in efforts + [None]:
++result = request(route, model, effort, stream)
++row = dict(model=model, route=route, stream=stream, input_effort=effort, **result)
++results.append(row)
++assert result["status"] == 200, row
++capture = result["capture"]
++assert capture.get("reasoning_effort") == (effort or default), row
++assert capture.get("model") == model, row
++assert capture.get("reasoning_summary") == "auto", row
++assert "thinking" not in capture, row
++assert result["reasoning"] == "synthetic-reasoning", row
++for route in ("responses", "chat/completions"):
++for effort in ("medium", "xhigh", "ultra"):
++result = request(route, "deepseek-v4.1-flash", effort, False)
++row = dict(model="deepseek-v4.1-flash", route=route, input_effort=effort, **result)
++results.append(row)
++assert result["status"] >= 400 and "capture" not in result, row
++result = request(route, "deepseek-v4.1-flash", "high", True, "none")
++row = dict(model="deepseek-v4.1-flash", route=route, input_summary="none", **result)
++results.append(row)
++assert result["status"] == 200 and result["capture"]["reasoning_summary"] == "none", row
++print(f"PASS: {len(results)} actual-host cases; no real upstream calls.")
++finally:
++(args.output / "results.json").write_text(json.dumps(results, indent=2) + "\n")
++proc.terminate()
++try:
++proc.wait(timeout=8)
++except subprocess.TimeoutExpired:
++proc.kill()
++proc.wait()
++print("Isolated CPA stopped; installed plugin and existing service unchanged.")
++
++
++if __name__ == "__main__":
++main()
